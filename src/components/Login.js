@@ -1,9 +1,19 @@
-import React from "react"
+import React, {useState} from "react"
 import "../styles/login.css";
+import Signup from "./Signup";
 
 const Login = () => {
+    const [signUpDisplay, setsignUpDisplay] = useState(false);
+
+    const toggleSignUp = () => {
+        setsignUpDisplay(!signUpDisplay);
+    }
     return (
-        <div className="login-page-container">
+        <>
+        {signUpDisplay && (
+            <Signup close={toggleSignUp}/>
+        )}
+        <div className={`login-page-container ${signUpDisplay ? "overlay" : ""}`}>
             <div className="title-info">
                 <h1 className="facebook-title">facebook</h1>
                 <h2 className="facebook-description">Connect with friends and the world around you on Facebook.</h2>
@@ -17,9 +27,10 @@ const Login = () => {
                     </form>
                     <a className="forgot-password">Forgot password?</a>
                 </div>
-                <button className="create-account-button" type="button">Create new account</button>
+                <button onClick={toggleSignUp} className="create-account-button" type="button">Create new account</button>
             </div>
         </div>
+        </>
     )
 }
 
