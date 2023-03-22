@@ -5,8 +5,8 @@ const Login = () => {
     return (
         <div className="login-page-container">
             <div className="title-info">
-                <h1>Facebook</h1>
-                <h2>Connect with friends and the world around you on Facebook.</h2>
+                <h1 className="facebook-title">facebook</h1>
+                <h2 className="facebook-description">Connect with friends and the world around you on Facebook.</h2>
             </div>
             <div className="login-form-container">
                 <div>
