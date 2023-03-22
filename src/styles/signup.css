@@ -1,0 +1,122 @@
+.signup-container {
+    width: 410px;
+    height: fit-content;
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+h2, p {
+    margin: 0;
+    padding: 0;
+}
+
+.signup-heading > p {
+    padding-bottom: 20px;
+    padding-top: 5px;
+}
+
+.signup-heading {
+    border-bottom: 1px solid #CCD0D5;
+    display: flex;
+    flex-direction: column;
+    color: #777;
+    padding-left: 10px;
+    position: relative;
+}
+
+.signup-form {
+    margin-top: 10px;
+}
+
+.signup-heading > h2 {
+    color: black;
+    font-size: 25px;
+}
+
+.signup-form > input {
+    border-radius: 5px;
+    background-color: #F5F6F7;
+    border: 1px solid #CCD0D5;
+    outline: none;
+    padding: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.signup-form > input[type="email"], .signup-form > input[type="password"] {
+    width: 370px;
+}
+
+.birthday-title, .gender-title {
+    padding: 10px;
+    font-size: smaller;
+    color: gray;
+}
+
+.birthday-select, .gender-select {
+    padding-left: 10px;
+    display: flex;
+    gap: 16px;
+}
+
+.birthday-select > select {
+    padding: 8px;
+    width: 120px;
+    border-radius: 5px;
+    border: 1px solid #CCD0D5;
+    font-size: 15px;
+}
+
+.gender-female, .gender-male {
+    display: flex;
+    width: 170px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #CCD0D5;
+    font-size: 15px;
+    justify-content: space-between;
+}
+
+.terms {
+    font-size: 12px;
+    color: #777;
+    padding: 10px;
+}
+
+.signup-button {
+    width: 196px;
+    border-radius: 8px;
+    background-color: #41B62A;
+    color: white;
+    border: none;
+    height: 40px;
+    font-size: 18px;
+}
+
+.signup-button:hover {
+    cursor: pointer;
+    background-color: #45AA31;
+}
+
+.signup-button-container {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.close-button {
+    height: 30px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.close-button:hover {
+    cursor: pointer;
+}
