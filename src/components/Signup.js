@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/signup.css";
 import closeButton from "../icons/close-button.svg";
 
-const Signup = () => {
+const Signup = (props) => {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const days = [];
     const years = [];
@@ -22,7 +22,7 @@ const Signup = () => {
             <div className="signup-heading">
                 <h2>Sign Up</h2>
                 <p>It's quick and easy.</p>
-                <img className="close-button" src={closeButton}></img>
+                <img onClick={props.close} className="close-button" src={closeButton}></img>
             </div>
             <form className="signup-form">
                 <input autoComplete="off" type="text" name="first-name" id="first-name" placeholder="First name"></input>
