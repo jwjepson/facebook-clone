@@ -7,7 +7,9 @@ const Signup = () => {
     const days = [];
     const years = [];
 
-    for (let i = 2023; i >= 1905; i--) {
+    const currentYear = new Date().getFullYear();
+
+    for (let i = currentYear; i >= (currentYear - 120); i--) {
         years.push(i);
     }
 
@@ -23,36 +25,36 @@ const Signup = () => {
                 <img className="close-button" src={closeButton}></img>
             </div>
             <form className="signup-form">
-                <input autocomplete="off" type="text" name="first-name" id="first-name" placeholder="First name"></input>
-                <input autocomplete="off" type="text" name="last-name" id="last-name" placeholder="Last name"></input>
-                <input autocomplete="off" type="email" name="email" id="email" placeholder="Email"></input>
+                <input autoComplete="off" type="text" name="first-name" id="first-name" placeholder="First name"></input>
+                <input autoComplete="off" type="text" name="last-name" id="last-name" placeholder="Last name"></input>
+                <input autoComplete="off" type="email" name="email" id="email" placeholder="Email"></input>
                 <input type="password" name="password" id="password" placeholder="New password"></input>
                 <div className="birthday-title">Birthday</div>
                 <div className="birthday-select">
                     <select id="month">
                         {months.map((month) => (
-                            <option>{month}</option>
+                            <option key={month}>{month}</option>
                         ))}
                     </select>
                     <select id="day">
                         {days.map((day) => (
-                            <option>{day}</option>
+                            <option key={day}>{day}</option>
                         ))}
                     </select>
                     <select id="year">
                         {years.map((year) => (
-                            <option>{year}</option>
+                            <option key={year}>{year}</option>
                         ))}
                     </select>
                 </div>
                 <div className="gender-title">Gender</div>
                 <div className="gender-select">
                     <div className="gender-female">
-                        <label for="female">Female</label>
+                        <label htmlFor="female">Female</label>
                         <input type="radio" name="sex" id="female" value="female"></input>
                     </div>
                     <div className="gender-male">
-                        <label for="male">Male</label>
+                        <label htmlFor="male">Male</label>
                         <input type="radio" name="sex" id="male" value="male"></input>
                     </div>
                 </div>
