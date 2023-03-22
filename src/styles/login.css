@@ -1,0 +1,91 @@
+.login-page-container {
+    display: flex;
+    background-color: #F0F2F5;
+    min-height: 100vh;
+    justify-content: space-evenly;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.title-info {
+    margin-top: 100px;
+}
+
+.login-form-container {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    background-color: white;
+    height: fit-content;
+    width: auto;
+    border-radius: 10px;
+    margin-top: 100px;
+    text-align: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.login-form-container > div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #DADDE1;
+}
+
+
+.login-form-container > div > form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.login-form-container > div > form > input {
+    padding: 15px;
+    width: 320px;
+    border-radius: 7px;
+    border: 1px solid #DDDFE2;
+    height: 20px;
+    font-size: 16px;
+    outline: none;
+}
+
+.login-form-container > div > form > input:focus {
+    border: 1px solid #1877F2;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.login-input:focus::placeholder {
+    color: #AF9292;
+}
+
+.login-button {
+    background-color:#1877F2;
+    padding: 15px;
+    border-radius: 7px;
+    border: none;
+    color: white;
+    font-size: 20px;
+}
+
+.login-button:hover, .create-account-button:hover {
+    cursor: pointer;
+}
+
+.forgot-password {
+    color:#1877F2;
+    font-size: 15px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+.create-account-button {
+    padding: 15px;
+    border-radius: 7px;
+    border: none;
+    color: white;
+    background-color: #41B62A;
+    width: 210px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    width: auto;
+}
