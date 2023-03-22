@@ -15,7 +15,7 @@ const Login = () => {
         )}
         <div className={`login-page-container ${signUpDisplay ? "overlay" : ""}`}>
             <div className="title-info">
-                <h1 className="facebook-title">facebook</h1>
+                <h1 className="facebook-title">facebook clone</h1>
                 <h2 className="facebook-description">Connect with friends and the world around you on Facebook.</h2>
             </div>
             <div className="login-form-container">
