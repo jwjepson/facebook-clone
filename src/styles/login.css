@@ -120,7 +120,7 @@ h1, h2 {
 }
 
 
-@media (max-width: 950px) {
+@media (max-width: 955px) {
     .login-page-container {
         flex-direction: column;
         gap: 40px;
