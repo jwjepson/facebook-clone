@@ -1,6 +1,6 @@
 .status-container {
     background-color: white;
-    width: 480px;
+    width: 100%;
     height: fit-content;
     display: flex;
     flex-direction: column;
