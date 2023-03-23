@@ -1,0 +1,25 @@
+.write-comment-avatar {
+    height: 35px;
+    border-radius: 50%;
+}
+
+.write-comment-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 5px;
+}
+
+.write-comment-input {
+    padding: 10px;
+    border-radius: 1rem;
+    border: none;
+    background-color: #F0F2F5;
+    height: 15px;
+    width: 100%;
+    text-align: left;
+    color: #777;
+    font-size: 13px;
+    margin-right: 5px;
+    outline: none;
+}
