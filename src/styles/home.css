@@ -1,0 +1,12 @@
+.home-page {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    height: 100vh;
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
