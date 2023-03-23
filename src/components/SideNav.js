@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles/sidenav.css";
 import defaultProfile from "../images/default-profile-pic.jpg";
 import friendsIcon from "../icons/friends-icon.svg";
 import groupsIcon from "../icons/groups-icon.svg";
