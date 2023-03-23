@@ -4,3 +4,32 @@ body {
     min-height: 100vh;
     background-color: #F0F2F5;
 }
+
+.main {
+    display: flex;
+    gap: 100px;
+    margin-top: 20px;
+}
+
+.like-button > button, .comment-button > button, .share-button > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 150px;
+    border: none;
+    background-color: white;
+    border-radius: 5px;
+    color: #777;
+    font-weight: 600;
+}
+
+.like-button > button:hover, .comment-button > button:hover, .share-button > button:hover {
+    cursor: pointer;
+    background-color: #F0F2F5;
+
+}
+
+.like-icon, .comment-icon, .share-icon {
+    height: 25px;
+}
