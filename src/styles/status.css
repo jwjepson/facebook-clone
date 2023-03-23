@@ -56,3 +56,7 @@
     border-bottom: 1px solid #DADDE1;
     margin-bottom: 3px;
 }
+
+.status-time {
+    font-size: smaller;
+}
