@@ -3,6 +3,7 @@ import SideNav from "./SideNav";
 import StatusCreator from "./StatusCreator";
 import Status from "./Status";
 import LeftSideBar from "./LeftSideBar";
+import RightSideBar from "./RightSideBar";
 import "../styles/home.css";
 
 const Home = () => {
@@ -14,7 +15,7 @@ const Home = () => {
                 <Status/>
                 <Status/>
             </div>
-            <SideNav/>
+            <RightSideBar/>
         </div>
     )
 }
