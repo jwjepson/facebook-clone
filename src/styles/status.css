@@ -1,0 +1,58 @@
+.status-container {
+    background-color: white;
+    width: 480px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 10px;
+    gap: 5px;
+}
+
+.status-container > div {
+    display: flex;
+    padding: 5px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-info.status {
+    gap: 10px;
+}
+
+.right-info.status {
+    padding-right: 0;
+}
+
+.status-options {
+    display: flex;
+}
+
+.status-options > button {
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 35px;
+    background-color: white;
+}
+
+.status-options > button:hover {
+    background-color: #F0F2F5;
+    cursor: pointer;
+}
+
+.status-option-icon {
+    height: 25px;
+    width: 35px;
+}
+
+.status-interactive-options {
+    border-top: 1px solid #DADDE1;
+    border-bottom: 1px solid #DADDE1;
+    margin-bottom: 3px;
+}
