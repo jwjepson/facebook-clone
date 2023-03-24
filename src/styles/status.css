@@ -11,7 +11,7 @@
     gap: 5px;
 }
 
-.status-container > div {
+.status-container > div:nth-child(1) {
     display: flex;
     padding: 5px;
     justify-content: space-between;
@@ -55,8 +55,17 @@
     border-top: 1px solid #DADDE1;
     border-bottom: 1px solid #DADDE1;
     margin-bottom: 3px;
+    display: flex;
+    padding: 5px;
+    justify-content: space-around;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .status-time {
     font-size: smaller;
+}
+
+.status-content {
+    padding: 5px;
 }
