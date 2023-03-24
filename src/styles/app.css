@@ -33,3 +33,8 @@ body {
 .like-icon, .comment-icon, .share-icon {
     height: 25px;
 }
+
+ul {
+    margin: 0;
+    padding: 0;
+}
