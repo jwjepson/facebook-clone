@@ -79,3 +79,15 @@ h4 {
     width: 349px;
     min-width: 280px;
 }
+
+@media (max-width: 1120px) {
+    .left-sidebar {
+        display: none;
+    }
+}
+
+@media (max-width: 840px) {
+    .right-sidebar {
+        display: none;
+    }
+}
