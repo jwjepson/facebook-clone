@@ -62,10 +62,15 @@ h4 {
 .sidenav-container, .shortcuts-container, .birthday-container {
     padding-left: 7px;
     padding-bottom: 10px;
-    width: 270px;
+    width: 100%;
 }
 
 .birthday-container {
     height: fit-content;
     border-bottom: 1px solid #DADDE1;
+}
+
+.left-sidebar {
+    width: 360px;
+    min-width: 280px;
 }
