@@ -14,3 +14,9 @@
     padding-left: 32px;
     padding-right: 32px;
 }
+
+@media (max-width: 840px) {
+    .home-page {
+        justify-content: center;
+    }
+}
