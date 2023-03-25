@@ -3,12 +3,12 @@ import profilePic from "../images/default-profile-pic.jpg";
 import "../styles/statuscreator.css";
 import addPhotoIcon from "../icons/add-photo-icon.svg";
 
-const StatusCreator = () => {
+const StatusCreator = (props) => {
     return (
         <div className="status-creator-container">
             <div className="top-info">
                 <img className="header-button" src={profilePic}></img>
-                <button className="status-creator-button" type="button" name="status-button">What's on your mind, User?</button>
+                <button onClick={props.open} className="status-creator-button" type="button" name="status-button">What's on your mind, User?</button>
             </div>
             <div className="bottom-options">
                 <ul>
