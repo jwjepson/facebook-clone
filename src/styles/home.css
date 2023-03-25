@@ -6,6 +6,10 @@
     margin-top: 55px;
 }
 
+.home-page.overlay {
+    opacity: 25%;
+}
+
 .timeline {
     display: flex;
     flex-direction: column;
