@@ -1,6 +1,6 @@
 .home-page {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     padding-top: 20px;
     height: 100vh;
 }
@@ -10,13 +10,34 @@
     flex-direction: column;
     gap: 15px;
     width: 680px;
+    max-width: 680px;
     align-items: center;
     padding-left: 32px;
     padding-right: 32px;
 }
 
-@media (max-width: 840px) {
+@media (max-width: 1330px) {
     .home-page {
+        margin-left: 285px;
+        justify-content: left;
+        margin-right: 285px;
+    }
+
+    .left-sidebar {
+        width: 262px;
+    }
+}
+
+@media (max-width: 1130px) {
+    .home-page {
+        margin-left: 0px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 900px) {
+    .home-page {
+        margin-right: 0px;
         justify-content: center;
     }
 }
