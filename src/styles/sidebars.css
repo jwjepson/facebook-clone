@@ -71,23 +71,29 @@ h4 {
 }
 
 .left-sidebar {
-    width: 360px;
-    min-width: 280px;
+    width: 20%;
+    position: fixed;
+    top: 10;
+    left: 0;
 }
 
 .right-sidebar {
-    width: 349px;
+    width: 20%;
     min-width: 280px;
+    position: fixed;
+    top: 10;
+    right: 0;
 }
 
-@media (max-width: 1120px) {
-    .left-sidebar {
+
+@media (max-width: 900px) {
+    .right-sidebar {
         display: none;
     }
 }
 
-@media (max-width: 840px) {
-    .right-sidebar {
+@media (max-width: 1130px) {
+    .left-sidebar {
         display: none;
     }
 }
