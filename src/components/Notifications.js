@@ -3,7 +3,7 @@ import "../styles/notifications.css";
 import moreIcon from "../icons/more-icon.svg";
 import profilePic from "../images/default-profile-pic.jpg";
 
-const Notifications = () => {
+const Notifications = (props) => {
     return (
         <div className="notifications-container">
             <div className="notifications-header">
