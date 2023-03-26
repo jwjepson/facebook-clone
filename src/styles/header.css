@@ -68,3 +68,8 @@
 .header-button:hover {
     cursor: pointer;
 }
+
+.header-button[name="chat-button"] > img, .header-button[name="notification-button"] > img {
+    height: 25px;
+    border-radius: 0;
+}
