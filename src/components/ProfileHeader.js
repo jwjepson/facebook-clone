@@ -6,7 +6,6 @@ import Header from "./Header";
 const ProfileHeader = () => {
     return (
         <>
-        <Header/>
         <div className="profile-header-container">
             <div className="profile-cover"></div>
             <div className="profile-header-middle-section">
