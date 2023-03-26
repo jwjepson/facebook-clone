@@ -6,6 +6,7 @@ import LeftSideBar from "./LeftSideBar";
 import RightSideBar from "./RightSideBar";
 import CreatePost from "./CreatePost";
 import "../styles/home.css";
+import Header from "./Header";
 
 const Home = () => {
     const [createPostDisplay, setcreatePostDisplay] = useState(false);
@@ -16,6 +17,7 @@ const Home = () => {
 
     return (
         <>
+        <Header/>
         {createPostDisplay && (
             <CreatePost close={toggleCreatePost}/>
         )}
@@ -23,7 +25,6 @@ const Home = () => {
             <LeftSideBar/>
             <div className="timeline">
                 <StatusCreator open={toggleCreatePost}/>
-                <Status/>
                 <Status/>
             </div>
             <RightSideBar/>
