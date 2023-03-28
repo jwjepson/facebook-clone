@@ -3,6 +3,7 @@ import Intro from "./Intro";
 import "../styles/profilecontent.css";
 import PhotosListSmall from "./PhotosListSmall";
 import StatusCreator from "./StatusCreator";
+import FriendsListSmall from "./FriendsListSmall";
 import Status from "./Status";
 
 const ProfileContent = () => {
@@ -12,6 +13,7 @@ const ProfileContent = () => {
                 <div className="profile-left-sidebar">
                     <Intro/>
                     <PhotosListSmall/>
+                    <FriendsListSmall/>
                 </div>
                 <div className="profile-timeline">
                     <StatusCreator/>
