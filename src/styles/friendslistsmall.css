@@ -1,0 +1,43 @@
+.friends-list-container.small {
+    background-color: white;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 15px;
+    gap: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.friends-list-container-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.friends-list-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 10px;
+    row-gap: 20px;
+}
+
+.thumbnail.friend {
+    width: 145px;
+}
+
+.thumbnail.friend > img {
+    border-radius: 8px;
+}
+
+.friend-name {
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.friends-list-container-header > h4 {
+    font-size: 20px;
+}
