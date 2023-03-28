@@ -7,7 +7,7 @@ const Photos = () => {
         <div className="photos-container">
             <div className="photos-container-header">
                 <h4>Photos</h4>
-                <a className="see-all-photos">See all photos</a>
+                <a className="see-all-button photos">See all photos</a>
             </div>
             <div className="photos-container-content">
                 <div className="photos-grid">
