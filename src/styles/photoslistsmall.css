@@ -22,9 +22,6 @@
     align-items: center;
 }
 
-.see-all-photos {
-    color: #1877F2;
-}
 
 .photo {
     object-fit: cover;
