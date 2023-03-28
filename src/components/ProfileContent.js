@@ -1,7 +1,9 @@
 import React from "react";
 import Intro from "./Intro";
 import "../styles/profilecontent.css";
+import PhotosListSmall from "./PhotosListSmall";
 import StatusCreator from "./StatusCreator";
+import Status from "./Status";
 
 const ProfileContent = () => {
     return (
@@ -9,6 +11,7 @@ const ProfileContent = () => {
             <div className="profile-home-content">
                 <div className="profile-left-sidebar">
                     <Intro/>
+                    <PhotosListSmall/>
                 </div>
                 <div className="profile-timeline">
                     <StatusCreator/>
