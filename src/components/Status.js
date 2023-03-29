@@ -28,7 +28,7 @@ const Status = () => {
                 </div>
             </div>
             <div className="status">
-                <div class="status-content">This is a test post.</div>
+                <div className="status-content">This is a test post.</div>
             </div>
             <div className="status-interactive-options">
                 <Like/>
