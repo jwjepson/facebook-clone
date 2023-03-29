@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import profilePic from "../images/default-profile-pic.jpg";
 import "../styles/profileheader.css";
 import Header from "./Header";
 
 const ProfileHeader = () => {
+
+    const [activeTab, setActiveTab] = useState(0);
+
+    const tabs = ["Posts", "About", "Friends", "Photos", "Videos"];
+
+    const handleTabClick = (tabIndex) => {
+        setActiveTab(tabIndex);
+    }
+
     return (
         <>
         <div className="profile-header-container">
@@ -23,11 +32,9 @@ const ProfileHeader = () => {
             </div>
             <div className="profile-navigation">
                 <ul>
-                    <li>Posts</li>
-                    <li>About</li>
-                    <li>Friends</li>
-                    <li>Photos</li>
-                    <li>Videos</li>
+                    {tabs.map((tab, index) => (
+                        <li key={index} onClick={() => handleTabClick(index)} className={`profile-nav ${activeTab === index ? "active" : ""}`}>{tab}</li>
+                    ))}
                 </ul>
             </div>
         </div>
