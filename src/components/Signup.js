@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/signup.css";
 import closeButton from "../icons/close-button.svg";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
-const Signup = (props) => {
+const Signup = ({ setUser, auth, close}) => {
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const days = [];
     const years = [];
@@ -17,18 +22,37 @@ const Signup = (props) => {
         days.push(i);
     }
 
+    const handleChange = (e) => {
+        const { name, value} = e.target;
+        if (name === "email") {
+            setEmail(value);
+        } else if (name === "password") {
+            setPassword(value);
+        }
+    }
+
+    const signUp = async (e) => {
+        e.preventDefault();
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+            setUser(userCredential.user);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <div className="signup-container">
             <div className="signup-heading">
                 <h2>Sign Up</h2>
                 <p>It's quick and easy.</p>
-                <img onClick={props.close} className="close-button" src={closeButton}></img>
+                <img onClick={close} className="close-button" src={closeButton}></img>
             </div>
-            <form className="signup-form">
+            <form onSubmit={signUp} className="signup-form">
                 <input autoComplete="off" type="text" name="first-name" id="first-name" placeholder="First name"></input>
                 <input autoComplete="off" type="text" name="last-name" id="last-name" placeholder="Last name"></input>
-                <input autoComplete="off" type="email" name="email" id="email" placeholder="Email"></input>
-                <input type="password" name="password" id="password" placeholder="New password"></input>
+                <input autoComplete="off" type="email" onChange={handleChange} value={email} name="email" id="email" placeholder="Email"></input>
+                <input type="password" name="password" id="password" onChange={handleChange} value={password} placeholder="New password"></input>
                 <div className="birthday-title">Birthday</div>
                 <div className="birthday-select">
                     <select id="month">
