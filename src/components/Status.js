@@ -9,14 +9,15 @@ import Share from "./Share";
 
 import "../styles/status.css";
 
-const Status = () => {
+const Status = ({userData}) => {
+
     return (
         <div className="status-container">
             <div>
                 <div className="left-info status">
                     <img className="header-button" src={profilePic}></img>
                     <div className="status-data">
-                        <div className="status-username">Username</div>
+                        <div className="status-username">{userData.firstName} {userData.lastName}</div>
                         <div className="status-time">30m</div>
                     </div>
                 </div>
