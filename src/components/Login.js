@@ -3,7 +3,7 @@ import "../styles/login.css";
 import Signup from "./Signup";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
-const Login = ({ setUser, auth }) => {
+const Login = ({ setUser, auth, db }) => {
     const [signUpDisplay, setsignUpDisplay] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -33,7 +33,7 @@ const Login = ({ setUser, auth }) => {
     return (
         <>
         {signUpDisplay && (
-            <Signup setUser={setUser} auth={auth} close={toggleSignUp}/>
+            <Signup db={db} setUser={setUser} auth={auth} close={toggleSignUp}/>
         )}
         <div className={`login-page-container ${signUpDisplay ? "overlay" : ""}`}>
             <div className="title-info">
