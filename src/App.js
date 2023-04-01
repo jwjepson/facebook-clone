@@ -1,3 +1,5 @@
+
+import React, {useEffect, useState} from "react";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Header from "./components/Header";
@@ -17,15 +19,50 @@ import PhotosPage from "./components/PhotosPage";
 import VideosPage from "./components/VideosPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./styles/app.css";
+import { initializeApp } from "firebase/app";
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 
 const App = () => {
 
-  const isLoggedIn = true;
+  const firebaseConfig = {
+    apiKey: "AIzaSyAJ1iVmgzpGtmPVITlE-22I7TKr9hm9zDs",
+    authDomain: "facebook-clone-5cb68.firebaseapp.com",
+    projectId: "facebook-clone-5cb68",
+    storageBucket: "facebook-clone-5cb68.appspot.com",
+    messagingSenderId: "821262756660",
+    appId: "1:821262756660:web:684f7a5683b85c1f87d361"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const [user, setUser] = useState(null);
+
+  const handleSignOut = async () => {
+    await signOut(auth);
+  }
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        // User is logged in
+        setUser(authUser);
+      } else {
+        // User is logged out
+        setUser(null);
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   return (
     <>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={isLoggedIn ? <Home/> : <Login/>}/>
+        <Route path="/" element={user ? <Home signOut={handleSignOut}/> : <Login setUser={setUser} auth={auth}/>}/>
         <Route path="/username" element={<PostsPage/>}/>
         <Route path="/username/about" element={<AboutPage/>}/>
         <Route path="/username/friends" element={<FriendsPage/>}/>
