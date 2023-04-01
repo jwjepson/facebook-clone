@@ -8,7 +8,7 @@ import CreatePost from "./CreatePost";
 import "../styles/home.css";
 import Header from "./Header";
 
-const Home = () => {
+const Home = (props) => {
     const [createPostDisplay, setcreatePostDisplay] = useState(false);
 
     const toggleCreatePost = () => {
@@ -22,7 +22,7 @@ const Home = () => {
             <CreatePost close={toggleCreatePost}/>
         )}
         <div className={`home-page ${createPostDisplay ? "overlay" : ""}`}>
-            <LeftSideBar/>
+            <LeftSideBar signOut={props.signOut}/>
             <div className="timeline">
                 <StatusCreator open={toggleCreatePost}/>
                 <Status/>
