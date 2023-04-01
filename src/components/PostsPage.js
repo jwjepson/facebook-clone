@@ -8,11 +8,11 @@ import ProfileHeader from "./ProfileHeader";
 import Header from "./Header";
 import "../styles/profilecontent.css";
 
-const PostsPage = () => {
+const PostsPage = ({userData}) => {
     return (
         <>
             <Header/>
-            <ProfileHeader/>
+            <ProfileHeader userData={userData}/>
             <div className="profile-content-container">
                 <div className="profile-home-content">
                     <div className="profile-left-sidebar">
@@ -21,14 +21,9 @@ const PostsPage = () => {
                         <FriendsListSmall/>
                     </div>
                     <div className="profile-timeline">
-                        <StatusCreator/>
-                        <Status/>
-                        <Status/>
-                        <Status/>
-                        <Status/>
-                        <Status/>
-                        <Status/>
-                        <Status/>
+                        <StatusCreator userData={userData}/>
+                        <Status userData={userData}/>
+                        <Status userData={userData}/>
                     </div>
                 </div>
             </div>
