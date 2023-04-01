@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import Header from "./Header";
 
-const ProfileHeader = (props) => {
+const ProfileHeader = ({userData}) => {
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -56,7 +56,7 @@ const ProfileHeader = (props) => {
                 <div className="profile-header-left-data">
                     <img className="profile-header-picture" src={profilePic}></img>
                     <div className="profile-data">
-                        <h1 className="profile-username">User Name</h1>
+                        <h1 className="profile-username">{userData.firstName} {userData.lastName}</h1>
                         <a className="profile-friend-count">500 friends</a>
                     </div>
                 </div>
