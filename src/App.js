@@ -22,6 +22,7 @@ import "./styles/app.css";
 import { initializeApp } from "firebase/app";
 import { BeatLoader } from "react-spinners";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 
 const App = () => {
 
@@ -36,14 +37,17 @@ const App = () => {
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+  const db = getFirestore(app);
+
 
   const [user, setUser] = useState(null);
+  const [userData, setUserData] = useState(null);
   const [isLoading, setisLoading] = useState(true);
 
   const handleSignOut = async () => {
     await signOut(auth);
   }
-
+  
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
@@ -59,7 +63,23 @@ const App = () => {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [auth]);
+
+  useEffect(() => {
+    const getUserData = async () => {
+      if (user) {
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setUserData(docSnap.data());
+        } else {
+          console.log("Document does not exist");
+        }
+      }
+    };
+
+    getUserData();
+  }, [user, db]);
 
   if (isLoading) {
     return <BeatLoader/>
@@ -67,16 +87,20 @@ const App = () => {
 
   return (
     <>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={user ? <Home signOut={handleSignOut}/> : <Login setUser={setUser} auth={auth}/>}/>
-        <Route path="/username" element={<PostsPage/>}/>
-        <Route path="/username/about" element={<AboutPage user={user}/>}/>
-        <Route path="/username/friends" element={<FriendsPage/>}/>
-        <Route path="/username/photos" element={<PhotosPage/>}/>
-        <Route path="/username/videos" element={<VideosPage/>}/>
-      </Routes>
-    </BrowserRouter>
+    {userData ? (
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={user ? <Home userData={userData} signOut={handleSignOut}/> : <Login db={db} setUser={setUser} auth={auth}/>}/>
+          <Route path="/username" element={<PostsPage userData={userData}/>}/>
+          <Route path="/username/about" element={<AboutPage user={user}/>}/>
+          <Route path="/username/friends" element={<FriendsPage/>}/>
+          <Route path="/username/photos" element={<PhotosPage/>}/>
+          <Route path="/username/videos" element={<VideosPage/>}/>
+        </Routes>
+      </BrowserRouter>
+    ) : (
+      <BeatLoader/>
+    )}
     </>
   );
 }
