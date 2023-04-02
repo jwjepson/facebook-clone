@@ -2,11 +2,11 @@ import React from "react";
 import Header from "./Header";
 import ProfileHeader from "./ProfileHeader";
 
-const PhotosPage = () => {
+const PhotosPage = ({userData}) => {
     return (
         <>
         <Header/>
-        <ProfileHeader/>
+        <ProfileHeader userData={userData}/>
         <div className="profile-content-container">Photos Page</div>
         </>
     )

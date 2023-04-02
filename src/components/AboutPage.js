@@ -2,12 +2,12 @@ import React from "react";
 import Header from "./Header";
 import ProfileHeader from "./ProfileHeader";
 
-const About = () => {
+const About = ({userData}) => {
     return (
         <>
         <Header/>
-        <ProfileHeader/>
-        <div className="profile-content-container">About</div>
+        <ProfileHeader userData={userData}/>
+        <div className="profile-content-container">{userData.uid}</div>
         </>
     )
 }

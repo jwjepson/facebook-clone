@@ -3,11 +3,11 @@ import Header from "./Header";
 import ProfileHeader from "./ProfileHeader";
 import FriendsListFull from "./FriendsListFull";
 
-const FriendsPage = () => {
+const FriendsPage = ({userData}) => {
     return (
         <>
         <Header/>
-        <ProfileHeader/>
+        <ProfileHeader userData={userData}/>
         <div className="profile-content-container">
             <FriendsListFull/>
         </div>
