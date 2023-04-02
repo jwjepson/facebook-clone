@@ -82,24 +82,24 @@ const App = () => {
   }, [user, db]);
 
   if (isLoading) {
-    return <BeatLoader/>
+    return null;
   }
 
   return (
     <>
-    {userData ? (
+    {user ? (
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={user ? <Home userData={userData} signOut={handleSignOut}/> : <Login db={db} setUser={setUser} auth={auth}/>}/>
-          <Route path="/username" element={<PostsPage userData={userData}/>}/>
-          <Route path="/username/about" element={<AboutPage user={user}/>}/>
-          <Route path="/username/friends" element={<FriendsPage/>}/>
-          <Route path="/username/photos" element={<PhotosPage/>}/>
-          <Route path="/username/videos" element={<VideosPage/>}/>
+          <Route path="/" element={userData ? <Home userData={userData} signOut={handleSignOut}/> : <BeatLoader/>}/>
+          <Route path="/username" element={userData ? <PostsPage userData={userData}/> : <BeatLoader/>}/>
+          <Route path="/username/about" element={userData ? <AboutPage userData={userData}/> : <BeatLoader/>}/>
+          <Route path="/username/friends" element={userData ? <FriendsPage userData={userData}/> : <BeatLoader/>}/>
+          <Route path="/username/photos" element={userData ? <PhotosPage userData={userData}/> : <BeatLoader/>}/>
+          <Route path="/username/videos" element={userData ? <VideosPage userData={userData}/> : <BeatLoader/>}/>
         </Routes>
       </BrowserRouter>
     ) : (
-      <BeatLoader/>
+      <Login db={db} setUser={setUser} auth={auth}/>
     )}
     </>
   );
