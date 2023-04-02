@@ -90,12 +90,12 @@ const App = () => {
     {user ? (
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={userData ? <Home userData={userData} signOut={handleSignOut}/> : <BeatLoader/>}/>
-          <Route path="/username" element={userData ? <PostsPage userData={userData}/> : <BeatLoader/>}/>
-          <Route path="/username/about" element={userData ? <AboutPage userData={userData}/> : <BeatLoader/>}/>
-          <Route path="/username/friends" element={userData ? <FriendsPage userData={userData}/> : <BeatLoader/>}/>
-          <Route path="/username/photos" element={userData ? <PhotosPage userData={userData}/> : <BeatLoader/>}/>
-          <Route path="/username/videos" element={userData ? <VideosPage userData={userData}/> : <BeatLoader/>}/>
+          <Route path="/" element={userData ? <Home user={user} userData={userData} signOut={handleSignOut}/> : <BeatLoader/>}/>
+          <Route path="/:userId" element={userData ? <PostsPage user={user} db={db} userData={userData}/> : <BeatLoader/>}/>
+          <Route path="/username/about" element={userData ? <AboutPage user={user}userData={userData}/> : <BeatLoader/>}/>
+          <Route path="/username/friends" element={userData ? <FriendsPage user={user} userData={userData}/> : <BeatLoader/>}/>
+          <Route path="/username/photos" element={userData ? <PhotosPage user={user} userData={userData}/> : <BeatLoader/>}/>
+          <Route path="/username/videos" element={userData ? <VideosPage user={user} userData={userData}/> : <BeatLoader/>}/>
         </Routes>
       </BrowserRouter>
     ) : (
