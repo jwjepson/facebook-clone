@@ -19,7 +19,7 @@ const Home = ({signOut, userData}) => {
         <>
         <Header/>
         {createPostDisplay && (
-            <CreatePost close={toggleCreatePost}/>
+            <CreatePost userData={userData} close={toggleCreatePost}/>
         )}
         <div className={`home-page ${createPostDisplay ? "overlay" : ""}`}>
             <LeftSideBar userData={userData} signOut={signOut}/>
