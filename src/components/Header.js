@@ -7,7 +7,7 @@ import Notifications from "./Notifications";
 import defaultProfile from "../images/default-profile-pic.jpg";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({user}) => {
     const [notificationsDisplay, setnotificationsDisplay] = useState(false);
 
     const toggleNotificationsDisplay = () => {
@@ -29,7 +29,7 @@ const Header = () => {
             <div className="right-info">
                 <button className="header-button" type="button" name="chat-button"><img src={chatIcon}></img></button>
                 <button onClick={toggleNotificationsDisplay} className="header-button" type="button" name="notification-button"><img src={notificationIcon}></img></button>
-                <Link to="/username">
+                <Link to={`/${user.uid}`}>
                     <button className="header-button" type="button" name="profile-button"><img src={defaultProfile}></img></button>
                 </Link>
             </div>

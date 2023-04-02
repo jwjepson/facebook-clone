@@ -5,12 +5,12 @@ import groupsIcon from "../icons/groups-icon.svg";
 import logoutIcon from "../icons/logout-icon.svg";
 import { Link } from "react-router-dom";
 
-const SideNav = ({ signOut, userData }) => {
+const SideNav = ({ signOut, userData, user }) => {
 
     return (
         <div className="sidenav-container">
             <ul>
-                <Link to="/username">
+                <Link to={`/${user.uid}`}>
                     <li className="sidenav-item"><img className="sidenav-icons"src={defaultProfile}></img>{userData.firstName} {userData.lastName}</li>
                 </Link>
                 <Link to="/username/friends">
