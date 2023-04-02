@@ -2,10 +2,10 @@ import React from "react";
 import Header from "./Header";
 import ProfileHeader from "./ProfileHeader";
 
-const VideosPage = ({userData}) => {
+const VideosPage = ({userData, user}) => {
     return (
         <>
-        <Header/>
+        <Header user={user}/>
         <ProfileHeader userData={userData}/>
         <div className="profile-content-container">Videos Page</div>
         </>
