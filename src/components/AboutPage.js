@@ -1,15 +1,12 @@
 import React from "react";
-import Header from "./Header";
-import ProfileHeader from "./ProfileHeader";
 
-const About = ({userData, user}) => {
+const AboutPage = ({userData, user, db}) => {
+
     return (
         <>
-        <Header user={user}/>
-        <ProfileHeader userData={userData}/>
-        <div className="profile-content-container">{userData.uid}</div>
+        <div className="profile-content-container">{userData.email}</div>
         </>
     )
 }
 
-export default About;
+export default AboutPage;
