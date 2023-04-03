@@ -23,6 +23,7 @@ import { initializeApp } from "firebase/app";
 import { BeatLoader } from "react-spinners";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
+import Profile from "./components/Profile";
 
 const App = () => {
 
@@ -91,11 +92,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={userData ? <Home user={user} userData={userData} signOut={handleSignOut}/> : <BeatLoader/>}/>
-          <Route path="/:userId" element={userData ? <PostsPage user={user} db={db} userData={userData}/> : <BeatLoader/>}/>
-          <Route path="/username/about" element={userData ? <AboutPage user={user}userData={userData}/> : <BeatLoader/>}/>
-          <Route path="/username/friends" element={userData ? <FriendsPage user={user} userData={userData}/> : <BeatLoader/>}/>
-          <Route path="/username/photos" element={userData ? <PhotosPage user={user} userData={userData}/> : <BeatLoader/>}/>
-          <Route path="/username/videos" element={userData ? <VideosPage user={user} userData={userData}/> : <BeatLoader/>}/>
+          <Route path="/:userId/*" element={userData ? <Profile user={user} db={db} userData={userData}/> : <BeatLoader/>}/>
         </Routes>
       </BrowserRouter>
     ) : (
