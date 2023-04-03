@@ -7,6 +7,8 @@ import PhotosPage from "./PhotosPage";
 import FriendsPage from "./FriendsPage";
 import VideosPage from "./VideosPage";
 import {doc, getDoc} from "firebase/firestore";
+import Header from "./Header";
+import ProfileHeader from "./ProfileHeader";
 
 const Profile = ({user, db, userData}) => {
 
@@ -37,6 +39,8 @@ const Profile = ({user, db, userData}) => {
     console.log(userId);
     return (
         <>
+        <Header user={user}/>
+        <ProfileHeader userData={profileData}/>
         <Routes>
             <Route path="/" element={<PostsPage user={user} db={db} userData={profileData} />}/>
             <Route path="/about" element={userData ? <AboutPage db={db} user={user} userData={profileData}/> : <BeatLoader/>}/>
