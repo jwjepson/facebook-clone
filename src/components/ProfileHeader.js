@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import profilePic from "../images/default-profile-pic.jpg";
 import "../styles/profileheader.css";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
-import Header from "./Header";
 
 const ProfileHeader = ({userData}) => {
 
@@ -12,33 +11,35 @@ const ProfileHeader = ({userData}) => {
 
     const tabs = ["posts", "about", "friends", "photos", "videos"];
 
+    let {userId} = useParams();
+
     const handleTabClick = (tabIndex) => {
         setActiveTab(tabIndex);
         switch(tabIndex) {
             case 0:
-                return navigate("/username");
+                return navigate(`/${userId}`);
             case 1: 
-                return navigate("/username/about");
+                return navigate(`/${userId}/about`);
             case 2: 
-                return navigate("/username/friends");
+                return navigate(`/${userId}/friends`);
             case 3:
-                return navigate("/username/photos");
+                return navigate(`/${userId}/photos`);
             case 4: 
-                return navigate("/username/videos");
+                return navigate(`/${userId}/videos`);
             default:
-                return navigate("/username");
+                return navigate(`/${userId}`);
         }
     }
 
     const getActiveTab = (pathname) => {
         switch(pathname) {
-            case "/username/about":
+            case `/${userId}/about`:
                 return 1;
-            case "/username/friends":
+            case `/${userId}/friends`:
                 return 2;
-            case "/username/photos":
+            case `/${userId}/photos`:
                 return 3;
-            case "/username/videos":
+            case `/${userId}/videos`:
                 return 4;
             default:
                 return 0;
