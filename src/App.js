@@ -91,7 +91,7 @@ const App = () => {
     {user ? (
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={userData ? <Home user={user} userData={userData} signOut={handleSignOut}/> : <BeatLoader/>}/>
+          <Route path="/" element={userData ? <Home db={db} user={user} userData={userData} signOut={handleSignOut}/> : <BeatLoader/>}/>
           <Route path="/:userId/*" element={userData ? <Profile user={user} db={db} userData={userData}/> : <BeatLoader/>}/>
         </Routes>
       </BrowserRouter>
