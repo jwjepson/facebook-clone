@@ -28,18 +28,18 @@ const CreatePost = ({close, userData, db, user}) => {
                 <h4 className="create-post-title">Create post</h4>
                 <img onClick={close} className="close-button" src={closeButton}></img>
             </div>
-            <form onSubmit={handlePost}>
             <div className="create-post-data">
                 <img className="header-button" src={profilePic}></img>
                 <div className="create-post-user">{userData.firstName} {userData.lastName}</div>
             </div>
-            <textarea className="create-post-content" onChange={handleChange} value={postContent} placeholder={`What's on your mind, ${userData.firstName}?`}></textarea>
-            <div className="create-post-options">
-                <ul>
-                    <li><img className="add-photo-icon" src={addPhotoIcon}></img>Photo/video</li>
-                </ul>
-            </div>
-            <button type="submit" className="post-button">Post</button>
+            <form onSubmit={handlePost}>
+                <textarea className="create-post-content" onChange={handleChange} value={postContent} placeholder={`What's on your mind, ${userData.firstName}?`}></textarea>
+                <div className="create-post-options">
+                    <ul>
+                        <li><img className="add-photo-icon" src={addPhotoIcon}></img>Photo/video</li>
+                    </ul>
+                </div>
+                <button type="submit" className="post-button">Post</button>
             </form>
         </div>
     )
