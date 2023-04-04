@@ -20,6 +20,7 @@ const CreatePost = ({close, userData, db, user}) => {
             content: postContent,
             postedBy: user.uid,
             timestamp: new Date(),
+            likes: [],
         });
     }
 
