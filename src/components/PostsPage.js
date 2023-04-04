@@ -5,7 +5,7 @@ import FriendsListSmall from "./FriendsListSmall";
 import Status from "./Status";
 import Intro from "./Intro";
 import "../styles/profilecontent.css";
-import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
+import { collection, query, where, onSnapshot, orderBy } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 
 
@@ -18,10 +18,12 @@ const PostsPage = ({user, userData, db}) => {
     useEffect(() => {
         const getUserPosts = async () => {
             const q = query(collection(db, "posts"), where("postedBy", "==", userId), orderBy("timestamp", "desc"));
-            const querySnapshot = await getDocs(q);
-            const docsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            setPosts(docsData);
-        }
+            const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                const docsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                setPosts(docsData);
+            });
+            return unsubscribe;
+        };
 
         getUserPosts();
     }, [userId, db]);
@@ -40,7 +42,7 @@ const PostsPage = ({user, userData, db}) => {
                     <div className="profile-timeline">
                         <StatusCreator userData={userData}/>
                         {posts.map((post) => (
-                            <Status key={post.id} userData={userData} postData={post}/>
+                            <Status key={post.id} user={user} db={db} userData={userData} postData={post}/>
                         ))}
                     </div>
                 </div>
