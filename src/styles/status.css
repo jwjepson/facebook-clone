@@ -70,3 +70,19 @@
 .status-content {
     padding: 5px;
 }
+
+.like-icon.count {
+    height: 12px;
+    width: 12px;
+    background-color: #0C87EE;
+    border-radius: 50%;
+    padding: 4px;
+    fill: white;
+}
+
+.like-count {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px;
+}
