@@ -9,7 +9,6 @@ import Comment from "./Comment";
 import Share from "./Share";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import likeIcon from "../icons/like-icon.svg";
 dayjs.extend(relativeTime);
 
 const formatDate = (timestamp) => {
