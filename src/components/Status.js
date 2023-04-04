@@ -23,7 +23,7 @@ const formatDate = (timestamp) => {
     return formattedDate;
 }
 
-const Status = ({userData, postData}) => {
+const Status = ({userData, postData, db, user}) => {
 
     const formattedDate = formatDate(postData.timestamp);
 
@@ -48,7 +48,7 @@ const Status = ({userData, postData}) => {
                 <div className="status-content">{postData.content}</div>
             </div>
             <div className="status-interactive-options">
-                <Like/>
+                <Like user={user} db={db} postData={postData}/>
                 <Comment/>
                 <Share/>
             </div>
