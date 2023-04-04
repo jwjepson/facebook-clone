@@ -15,6 +15,7 @@ const CreatePost = ({close, userData, db, user}) => {
 
     const handlePost = async (e) => {
         e.preventDefault();
+        close();
         const docRef = await addDoc(collection(db, "posts"), {
             content: postContent,
             postedBy: user.uid,
