@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../styles/status.css";
 import profilePic from "../images/default-profile-pic.jpg";
 import moreIcon from "../icons/more-icon.svg";
@@ -9,6 +9,7 @@ import Comment from "./Comment";
 import Share from "./Share";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import likeIcon from "../icons/like-icon.svg";
 dayjs.extend(relativeTime);
 
 const formatDate = (timestamp) => {
@@ -47,6 +48,16 @@ const Status = ({userData, postData, db, user}) => {
             <div className="status">
                 <div className="status-content">{postData.content}</div>
             </div>
+            {postData.likes.length > 0 && (
+                <div className="likes">
+                <div className="like-count">
+                    <svg aria-label="like icon" viewBox="0 96 960 960" className="like-icon count">
+                        <path d="M729 960H241V418l290-301 43 37q10.875 9.129 14.938 20.065Q593 185 593 199.32V211l-46 207h316q28.2 0 50.6 22.4Q936 462.8 936 491v85.33q0 11.291-3 26.524T925 629L805.33 906.745q-10.675 22.273-31.71 37.764Q752.586 960 729 960ZM181 418v542H63V418h118Z"/>
+                    </svg>
+                    {(postData.likes.length)}
+                </div>
+            </div>
+            )}
             <div className="status-interactive-options">
                 <Like user={user} db={db} postData={postData}/>
                 <Comment/>
