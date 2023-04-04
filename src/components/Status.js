@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/status.css";
 import profilePic from "../images/default-profile-pic.jpg";
 import moreIcon from "../icons/more-icon.svg";
 import closeIcon from "../icons/close-button.svg";
@@ -6,10 +7,25 @@ import Like from "./Like";
 import WriteComment from "./WriteComment";
 import Comment from "./Comment";
 import Share from "./Share";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
 
-import "../styles/status.css";
+const formatDate = (timestamp) => {
+    const date = timestamp.toDate();
+    let formattedDate = date.toLocaleDateString("en-US", {month: "long", day: "numeric", year: "numeric"});
+    const todaysDate = new Date().toLocaleDateString("en-US", {month: "long", day: "numeric", year: "numeric"});
 
-const Status = ({userData}) => {
+    if (formattedDate === todaysDate) {
+        formattedDate = dayjs(date).fromNow();
+    }
+
+    return formattedDate;
+}
+
+const Status = ({userData, postData}) => {
+
+    const formattedDate = formatDate(postData.timestamp);
 
     return (
         <div className="status-container">
@@ -18,7 +34,7 @@ const Status = ({userData}) => {
                     <img className="header-button" src={profilePic}></img>
                     <div className="status-data">
                         <div className="status-username">{userData.firstName} {userData.lastName}</div>
-                        <div className="status-time">30m</div>
+                        <div className="status-time">{formattedDate}</div>
                     </div>
                 </div>
                 <div className="right-info status">
@@ -29,7 +45,7 @@ const Status = ({userData}) => {
                 </div>
             </div>
             <div className="status">
-                <div className="status-content">This is a test post.</div>
+                <div className="status-content">{postData.content}</div>
             </div>
             <div className="status-interactive-options">
                 <Like/>
