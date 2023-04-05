@@ -5,13 +5,19 @@ import notificationIcon from "../icons/notification-icon.svg";
 import chatIcon from "../icons/chat-icon.svg";
 import Notifications from "./Notifications";
 import defaultProfile from "../images/default-profile-pic.jpg";
+import Search from "./Search";
 import { Link } from "react-router-dom";
 
-const Header = ({user}) => {
+const Header = ({user, db}) => {
     const [notificationsDisplay, setnotificationsDisplay] = useState(false);
+    const [searchBarDisplay, setSearchBarDisplay] = useState(false);
 
     const toggleNotificationsDisplay = () => {
         setnotificationsDisplay(!notificationsDisplay);
+    }
+
+    const toggleSearchBarDisplay = () => {
+        setSearchBarDisplay(!searchBarDisplay);
     }
 
     return (
@@ -19,12 +25,15 @@ const Header = ({user}) => {
         {notificationsDisplay && (
             <Notifications/>
         )}
+        {searchBarDisplay && (
+            <Search db={db} toggleSearchBarDisplay={toggleSearchBarDisplay}/>
+        )}
         <div className="header">
             <div className="left-info">
                 <Link to="/">
                     <img className="logo-small" src={logo} alt="logo"></img>
                 </Link>
-                <input className="search-box" placeholder="Search Facebook Clone" autoComplete="off" type="search" name="search"></input>
+                <input onClick={toggleSearchBarDisplay} className="search-box" placeholder="Search Facebook Clone" autoComplete="off" type="search" name="search"></input>
             </div>
             <div className="right-info">
                 <button className="header-button" type="button" name="chat-button"><img src={chatIcon}></img></button>
