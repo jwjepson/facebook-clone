@@ -4,7 +4,7 @@ import "../styles/profileheader.css";
 import { useParams } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const ProfileHeader = ({userData}) => {
+const ProfileHeader = ({userData , user}) => {
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -48,6 +48,8 @@ const ProfileHeader = ({userData}) => {
 
     const initialActiveTab = getActiveTab(location.pathname);
     const [activeTab, setActiveTab] = useState(initialActiveTab);
+
+    console.log(userData);
     
     return (
         <>
@@ -58,11 +60,25 @@ const ProfileHeader = ({userData}) => {
                     <img className="profile-header-picture" src={profilePic}></img>
                     <div className="profile-data">
                         <h1 className="profile-username">{userData.firstName} {userData.lastName}</h1>
-                        <a className="profile-friend-count">500 friends</a>
+                        <a className="profile-friend-count">
+                            {userData.friends.length === 1 ? (
+                                `${userData.friends.length} friend`
+                            ) : (
+                                `${userData.friends.length} friends`
+                            )}
+                        </a>
                     </div>
                 </div>
                 <div className="profile-actions">
-                    <button type="button">Friends</button>
+                    {userData.friends.includes(user.uid) && (
+                        <button type="button">Friends</button>
+                    )}
+                    {!userData.friends.includes(user.uid) && userData.id !== user.uid && (
+                        <button type="button">Add Friend</button>
+                    )}
+                    {userData.id === user.uid && (
+                        <button type="button">Edit Profile</button>
+                    )}
                     <button type="button">Message</button>
                 </div>
             </div>
