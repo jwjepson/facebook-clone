@@ -79,7 +79,9 @@ const ProfileHeader = ({userData , user}) => {
                     {userData.id === user.uid && (
                         <button type="button">Edit Profile</button>
                     )}
-                    <button type="button">Message</button>
+                    {userData.id !== user.uid && (
+                        <button type="button">Message</button>
+                    )}
                 </div>
             </div>
             <div className="profile-navigation">
