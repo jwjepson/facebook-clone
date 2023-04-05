@@ -22,7 +22,7 @@ const Profile = ({user, db, userData}) => {
             const docRef = doc(db, "users", userId);
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
-                setProfileData(docSnap.data());
+                setProfileData({id: docSnap.id, ...docSnap.data()});
                 setisLoading(false);
             } else {
                 console.log("Profile does not exist");
@@ -36,11 +36,10 @@ const Profile = ({user, db, userData}) => {
         return null;
     }
 
-    console.log(userId);
     return (
         <>
         <Header db={db} user={user}/>
-        <ProfileHeader userData={profileData}/>
+        <ProfileHeader user={user} userData={profileData}/>
         <Routes>
             <Route path="/" element={<PostsPage user={user} db={db} userData={profileData} />}/>
             <Route path="/about" element={userData ? <AboutPage db={db} user={user} userData={profileData}/> : <BeatLoader/>}/>
