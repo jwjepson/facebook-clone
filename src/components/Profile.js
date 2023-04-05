@@ -39,7 +39,7 @@ const Profile = ({user, db, userData}) => {
     console.log(userId);
     return (
         <>
-        <Header user={user}/>
+        <Header db={db} user={user}/>
         <ProfileHeader userData={profileData}/>
         <Routes>
             <Route path="/" element={<PostsPage user={user} db={db} userData={profileData} />}/>

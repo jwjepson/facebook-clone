@@ -32,7 +32,7 @@ const Home = ({signOut, userData, user, db}) => {
 
     return (
         <>
-        <Header user={user}/>
+        <Header db={db} user={user}/>
         {createPostDisplay && (
             <CreatePost user={user} db={db} userData={userData} close={toggleCreatePost}/>
         )}
