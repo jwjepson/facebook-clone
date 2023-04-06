@@ -43,7 +43,7 @@ const Profile = ({user, db, userData}) => {
         <Routes>
             <Route path="/" element={<PostsPage user={user} db={db} userData={profileData} />}/>
             <Route path="/about" element={userData ? <AboutPage db={db} user={user} userData={profileData}/> : <BeatLoader/>}/>
-            <Route path="/friends" element={userData ? <FriendsPage user={user} userData={profileData}/> : <BeatLoader/>}/>
+            <Route path="/friends" element={userData ? <FriendsPage user={user} db={db} userData={profileData}/> : <BeatLoader/>}/>
             <Route path="/photos" element={userData ? <PhotosPage user={user} userData={profileData}/> : <BeatLoader/>}/>
             <Route path="/videos" element={userData ? <VideosPage user={user} userData={profileData}/> : <BeatLoader/>}/>
         </Routes>

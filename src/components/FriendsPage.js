@@ -1,11 +1,11 @@
 import React from "react";
 import FriendsListFull from "./FriendsListFull";
 
-const FriendsPage = ({userData, user}) => {
+const FriendsPage = ({userData, user, db}) => {
     return (
         <>
         <div className="profile-content-container">
-            <FriendsListFull/>
+            <FriendsListFull userData={userData} db={db}/>
         </div>
         </>
     )
