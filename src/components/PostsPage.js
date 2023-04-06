@@ -37,7 +37,7 @@ const PostsPage = ({user, userData, db}) => {
                     <div className="profile-left-sidebar">
                         <Intro/>
                         <PhotosListSmall/>
-                        <FriendsListSmall/>
+                        <FriendsListSmall db={db} userData={userData}/>
                     </div>
                     <div className="profile-timeline">
                         <StatusCreator userData={userData}/>
