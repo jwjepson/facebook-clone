@@ -1,11 +1,12 @@
 import React from "react";
 import FriendsListFull from "./FriendsListFull";
+import { checkPermission } from "../helpers/checkPermission";
 
 const FriendsPage = ({userData, user, db}) => {
     return (
         <>
         <div className="profile-content-container">
-            <FriendsListFull userData={userData} db={db}/>
+            <FriendsListFull user={user} userData={userData} db={db}/>
         </div>
         </>
     )
