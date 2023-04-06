@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import profilePic from "../images/default-profile-pic.jpg";
 import "../styles/profileheader.css";
 import { useParams } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const ProfileHeader = ({userData , user}) => {
+const ProfileHeader = ({userData , user, sendFriendRequest}) => {
 
     const navigate = useNavigate();
     const location = useLocation();
+
+    const isFriendRequestSent = userData.friendRequests.includes(user.uid);
 
     const tabs = ["posts", "about", "friends", "photos", "videos"];
 
@@ -49,7 +51,10 @@ const ProfileHeader = ({userData , user}) => {
     const initialActiveTab = getActiveTab(location.pathname);
     const [activeTab, setActiveTab] = useState(initialActiveTab);
 
-    console.log(userData);
+    useEffect(() => {
+        const initialActiveTab = getActiveTab(location.pathname);
+        setActiveTab(initialActiveTab);
+    }, [location.pathname]);
     
     return (
         <>
@@ -74,7 +79,9 @@ const ProfileHeader = ({userData , user}) => {
                         <button type="button">Friends</button>
                     )}
                     {!userData.friends.includes(user.uid) && userData.id !== user.uid && (
-                        <button type="button">Add Friend</button>
+                       <button onClick={sendFriendRequest} data-user={userData.id} type="button">
+                        {isFriendRequestSent ? "Requested" : "Add Friend"}
+                        </button>
                     )}
                     {userData.id === user.uid && (
                         <button type="button">Edit Profile</button>
