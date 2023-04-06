@@ -6,7 +6,7 @@ import AboutPage from "./AboutPage";
 import PhotosPage from "./PhotosPage";
 import FriendsPage from "./FriendsPage";
 import VideosPage from "./VideosPage";
-import {doc, getDoc} from "firebase/firestore";
+import {arrayRemove, arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 import Header from "./Header";
 import ProfileHeader from "./ProfileHeader";
 
@@ -16,6 +16,29 @@ const Profile = ({user, db, userData}) => {
     const [isLoading, setisLoading] = useState(true);
 
     let {userId} = useParams();
+
+    const sendFriendRequest = async (e) => {
+        const userId = e.target.getAttribute("data-user");
+        const docRef = doc(db, "users", userId);
+        const docSnap = await getDoc(docRef);
+        if (!docSnap.data().friendRequests.includes(user.uid)) {
+            setProfileData(prevData => ({
+                ...prevData,
+                friendRequests: [...prevData.friendRequests, user.uid]
+            }))
+            await updateDoc(docRef, {
+                friendRequests: arrayUnion(user.uid)
+            })
+        } else {
+            setProfileData(prevData => ({
+                ...prevData,
+                friendRequests: prevData.friendRequests.filter(id => id !== user.uid)
+            }))
+            await updateDoc(docRef, {
+                friendRequests: arrayRemove(user.uid)
+            })
+        }
+    }
 
     useEffect(() => {
         const getProfileData = async () => {
@@ -39,7 +62,7 @@ const Profile = ({user, db, userData}) => {
     return (
         <>
         <Header db={db} user={user}/>
-        <ProfileHeader user={user} userData={profileData}/>
+        <ProfileHeader sendFriendRequest={sendFriendRequest} user={user} userData={profileData}/>
         <Routes>
             <Route path="/" element={<PostsPage user={user} db={db} userData={profileData} />}/>
             <Route path="/about" element={userData ? <AboutPage db={db} user={user} userData={profileData}/> : <BeatLoader/>}/>
