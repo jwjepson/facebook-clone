@@ -7,6 +7,7 @@ import Intro from "./Intro";
 import "../styles/profilecontent.css";
 import { collection, query, where, onSnapshot, orderBy } from "firebase/firestore";
 import { useParams } from "react-router-dom";
+import { checkPermission } from "../helpers/checkPermission";
 
 
 const PostsPage = ({user, userData, db}) => {
@@ -35,15 +36,19 @@ const PostsPage = ({user, userData, db}) => {
             <div className="profile-content-container">
                 <div className="profile-home-content">
                     <div className="profile-left-sidebar">
-                        <Intro/>
-                        <PhotosListSmall/>
+                        <Intro user={user} userData={userData}/>
+                        <PhotosListSmall user={user} userData={userData}/>
                         <FriendsListSmall db={db} userData={userData}/>
                     </div>
                     <div className="profile-timeline">
-                        <StatusCreator userData={userData}/>
-                        {posts.map((post) => (
-                            <Status key={post.id} user={user} db={db} userData={userData} postData={post}/>
-                        ))}
+                        {checkPermission(user, userData) && (
+                            <>
+                                <StatusCreator userData={userData}/>
+                                {posts.map((post) => (
+                                    <Status key={post.id} user={user} db={db} userData={userData} postData={post}/>
+                                ))}
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

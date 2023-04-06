@@ -1,8 +1,9 @@
 import React from "react";
 import "../styles/photoslistsmall.css";
 import profilePic from "../images/default-profile-pic.jpg";
+import { checkPermission } from "../helpers/checkPermission";
 
-const Photos = () => {
+const Photos = ({user, userData}) => {
     return (
         <div className="photos-container">
             <div className="photos-container-header">
@@ -11,26 +12,30 @@ const Photos = () => {
             </div>
             <div className="photos-container-content">
                 <div className="photos-grid">
-                    <div className="thumbnail">
-                        <img className="photo" src={profilePic}></img>
-                    </div>
-                    <div className="thumbnail">
-                        <img className="photo" src={profilePic}></img>
-                    </div><div className="thumbnail">
-                        <img className="photo" src={profilePic}></img>
-                    </div><div className="thumbnail">
-                        <img className="photo" src={profilePic}></img>
-                    </div><div className="thumbnail">
-                        <img className="photo" src={profilePic}></img>
-                    </div><div className="thumbnail">
-                        <img className="photo" src={profilePic}></img>
-                    </div><div className="thumbnail">
-                        <img className="photo" src={profilePic}></img>
-                    </div><div className="thumbnail">
-                        <img className="photo" src={profilePic}></img>
-                    </div><div className="thumbnail">
-                        <img className="photo" src={profilePic}></img>
-                    </div>
+                    {checkPermission(user, userData) && (
+                        <>
+                            <div className="thumbnail">
+                                <img className="photo" src={profilePic}></img>
+                            </div>
+                            <div className="thumbnail">
+                                <img className="photo" src={profilePic}></img>
+                            </div><div className="thumbnail">
+                                <img className="photo" src={profilePic}></img>
+                            </div><div className="thumbnail">
+                                <img className="photo" src={profilePic}></img>
+                            </div><div className="thumbnail">
+                                <img className="photo" src={profilePic}></img>
+                            </div><div className="thumbnail">
+                                <img className="photo" src={profilePic}></img>
+                            </div><div className="thumbnail">
+                                <img className="photo" src={profilePic}></img>
+                            </div><div className="thumbnail">
+                                <img className="photo" src={profilePic}></img>
+                            </div><div className="thumbnail">
+                                <img className="photo" src={profilePic}></img>
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
         </div>

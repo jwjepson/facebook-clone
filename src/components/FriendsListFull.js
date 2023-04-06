@@ -4,8 +4,9 @@ import profilePic from "../images/default-profile-pic.jpg";
 import moreIcon from "../icons/more-icon.svg";
 import { collection, query, where, getDocs, limit } from "firebase/firestore";
 import { Link } from "react-router-dom";
+import { checkPermission } from "../helpers/checkPermission";
 
-const FriendsListFull = ({db, userData}) => {
+const FriendsListFull = ({db, userData, user}) => {
 
     const [friendsData, setFriendsData] = useState([]);
 
@@ -32,23 +33,27 @@ const FriendsListFull = ({db, userData}) => {
                     <a>Friend requests</a>
                 </div>
             </div>
-            <div className="friends-list">
-                {friendsData.map((friend) => (
-                    <div className="friend full-container">
-                        <div className="left-info">
-                            <Link to={`/${friend.id}`}>
-                                <div className="thumbnail friend full">
-                                    <img className="photo" src={profilePic}></img>
-                                </div>
-                            </Link>
-                            <h4>
-                                <Link to={`/${friend.id}`}>{friend.firstName} {friend.lastName} </Link>
-                            </h4>
+            {checkPermission(user, userData) ? (
+                <div className="friends-list">
+                    {friendsData.map((friend) => (
+                        <div className="friend full-container">
+                            <div className="left-info">
+                                <Link to={`/${friend.id}`}>
+                                    <div className="thumbnail friend full">
+                                        <img className="photo" src={profilePic}></img>
+                                    </div>
+                                </Link>
+                                <h4>
+                                    <Link to={`/${friend.id}`}>{friend.firstName} {friend.lastName} </Link>
+                                </h4>
+                            </div>
+                            <button type="button" name="more-button"><img className="status-option-icon" src={moreIcon}></img></button>
                         </div>
-                        <button type="button" name="more-button"><img className="status-option-icon" src={moreIcon}></img></button>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+            ) : (
+                <div className="no-content-message">No friends to show</div>
+            )}
         </div>
     )
 }
