@@ -76,6 +76,8 @@ const Signup = ({ setUser, auth, close, db}) => {
                     year: year,
                 },
                 gender: gender,
+                friends: [],
+                id: userCredential.user.uid,
             });
         } catch (error) {
             console.error(error);
