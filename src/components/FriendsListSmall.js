@@ -2,17 +2,24 @@ import React, { useEffect, useState} from "react";
 import "../styles/friendslistsmall.css";
 import profilePic from "../images/default-profile-pic.jpg";
 import { collection, query, where, getDocs, limit } from "firebase/firestore";
+import { Link } from "react-router-dom";
+import { BeatLoader } from "react-spinners";
 
 const FriendsListSmall = ({userData, db}) => {
 
     const [friendsData, setFriendsData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const getFriendsData = async () => {
-            const q = query(collection(db, "users"), where("id", "in", userData.friends), limit(9));
-            const querySnapshot = await getDocs(q);
-            const friendsData = querySnapshot.docs.map((doc) => doc.data());
-            setFriendsData(friendsData);
+            try {
+                const q = query(collection(db, "users"), where("id", "in", userData.friends), limit(9));
+                const querySnapshot = await getDocs(q);
+                const friendsData = querySnapshot.docs.map((doc) => doc.data());
+                setFriendsData(friendsData);
+            } catch {
+                setFriendsData([]);
+            }
         }
         getFriendsData();
     }, [userData.friends]);
@@ -34,10 +41,16 @@ const FriendsListSmall = ({userData, db}) => {
                 <div className="friends-list-grid">
                     {friendsData.map((friend) => (
                         <div className="friend">
-                            <div className="thumbnail friend">
-                                <img className="photo" src={profilePic}></img>
-                            </div>
-                            <h4 className="friend-name">{friend.firstName} {friend.lastName}</h4>
+                            <Link to={`/${friend.id}`}>
+                                <div className="thumbnail friend">
+                                    <img className="photo" src={profilePic}></img>
+                                </div>
+                            </Link>
+                            <h4 className="friend-name">
+                                <Link to={`/${friend.id}`}>
+                                    {friend.firstName} {friend.lastName}
+                                </Link>
+                            </h4>
                         </div>
                     ))}
                 </div>
