@@ -38,7 +38,7 @@ const PostsPage = ({user, userData, db}) => {
                     <div className="profile-left-sidebar">
                         <Intro user={user} userData={userData}/>
                         <PhotosListSmall user={user} userData={userData}/>
-                        <FriendsListSmall db={db} userData={userData}/>
+                        <FriendsListSmall user={user} db={db} userData={userData}/>
                     </div>
                     <div className="profile-timeline">
                         {checkPermission(user, userData) && (
