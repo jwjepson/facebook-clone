@@ -4,8 +4,9 @@ import profilePic from "../images/default-profile-pic.jpg";
 import { collection, query, where, getDocs, limit } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
+import { checkPermission } from "../helpers/checkPermission";
 
-const FriendsListSmall = ({userData, db}) => {
+const FriendsListSmall = ({user, userData, db}) => {
 
     const [friendsData, setFriendsData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -38,22 +39,24 @@ const FriendsListSmall = ({userData, db}) => {
                 )}
             </span>
             <div className="friends-list-container-content">
-                <div className="friends-list-grid">
-                    {friendsData.map((friend) => (
-                        <div className="friend">
-                            <Link to={`/${friend.id}`}>
-                                <div className="thumbnail friend">
-                                    <img className="photo" src={profilePic}></img>
-                                </div>
-                            </Link>
-                            <h4 className="friend-name">
+                {checkPermission(user, userData) && (
+                    <div className="friends-list-grid">
+                        {friendsData.map((friend) => (
+                            <div className="friend">
                                 <Link to={`/${friend.id}`}>
-                                    {friend.firstName} {friend.lastName}
+                                    <div className="thumbnail friend">
+                                        <img className="photo" src={profilePic}></img>
+                                    </div>
                                 </Link>
-                            </h4>
-                        </div>
-                    ))}
-                </div>
+                                <h4 className="friend-name">
+                                    <Link to={`/${friend.id}`}>
+                                        {friend.firstName} {friend.lastName}
+                                    </Link>
+                                </h4>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     )
