@@ -46,9 +46,19 @@
     border-radius: 8px;
 }
 
+.confirm-button:hover {
+    cursor: pointer;
+    background-color: #0d6de9
+}
+
 .delete-button {
     padding: 10px;
     background-color: #F0F2F5;
     border: none;
     border-radius: 8px;
+}
+
+.delete-button:hover {
+    cursor: pointer;
+    background-color: #e4e8ed;
 }
