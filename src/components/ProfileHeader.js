@@ -38,6 +38,7 @@ const ProfileHeader = ({userData , user, sendFriendRequest}) => {
             case `/${userId}/about`:
                 return 1;
             case `/${userId}/friends`:
+            case `/${userId}/friends/requests`:
                 return 2;
             case `/${userId}/photos`:
                 return 3;
