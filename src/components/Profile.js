@@ -9,6 +9,7 @@ import VideosPage from "./VideosPage";
 import {arrayRemove, arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 import Header from "./Header";
 import ProfileHeader from "./ProfileHeader";
+import FriendRequests from "./FriendRequests";
 
 const Profile = ({user, db, userData}) => {
 
@@ -40,6 +41,10 @@ const Profile = ({user, db, userData}) => {
         }
     }
 
+    const handleFriendRequestChange = (newProfileData) => {
+        setProfileData(newProfileData);
+    }
+
     useEffect(() => {
         const getProfileData = async () => {
             const docRef = doc(db, "users", userId);
@@ -69,6 +74,7 @@ const Profile = ({user, db, userData}) => {
             <Route path="/friends" element={userData ? <FriendsPage user={user} db={db} userData={profileData}/> : <BeatLoader/>}/>
             <Route path="/photos" element={userData ? <PhotosPage user={user} userData={profileData}/> : <BeatLoader/>}/>
             <Route path="/videos" element={userData ? <VideosPage user={user} userData={profileData}/> : <BeatLoader/>}/>
+            <Route path="/friends/requests" element={userData ? <FriendRequests onFriendRequestChange={handleFriendRequestChange} db={db} userData={profileData} user={user}/> : <BeatLoader/>}/>
         </Routes>
         </>
     )
