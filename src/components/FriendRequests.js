@@ -4,37 +4,9 @@ import "../styles/friendrequests.css";
 import profilePic from "../images/default-profile-pic.jpg";
 import { collection, query, where, getDocs, doc, getDoc, updateDoc, arrayRemove, arrayUnion, writeBatch } from "firebase/firestore";
 
-const FriendRequests = ({userData, user, db, onFriendRequestChange}) => {
+const FriendRequests = ({userData, user, db, confirmRequest}) => {
 
     const [friendRequestData, setFriendRequestData] = useState([]);
-
-    const confirmRequest = async (e) => {
-            const userId = e.target.getAttribute("data-id");
-            const requesterRef = doc(db, "users", userId);
-            const currentUserRef = doc(db, "users", user.uid);
-
-            const updatedUserData = {
-                ...userData,
-                friendRequests: userData.friendRequests.filter((id) => id !== userId),
-                friends: [...userData.friends, userId]
-            };
-            
-            onFriendRequestChange(updatedUserData);
-           
-            const batch = writeBatch(db);
-
-            batch.update(requesterRef, {
-                friends: arrayUnion(user.uid),
-            })
-
-            batch.update(currentUserRef, {
-                friendRequests: arrayRemove(userId),
-                friends: arrayUnion(userId)
-            })
-
-            await batch.commit();
-
-    }
 
     useEffect(() => {
         const getFriendRequestData = async () => {
@@ -49,8 +21,6 @@ const FriendRequests = ({userData, user, db, onFriendRequestChange}) => {
         }
         getFriendRequestData();
     }, [userData, db]);
-
-    console.log(userData);
 
     return (
         <div className="profile-content-container">
