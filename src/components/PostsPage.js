@@ -10,13 +10,14 @@ import { useParams } from "react-router-dom";
 import { checkPermission } from "../helpers/checkPermission";
 
 
-const PostsPage = ({user, userData, db}) => {
+const PostsPage = ({user, userData, db, friendRequestConfirmed}) => {
 
     let {userId} = useParams();
 
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
+        console.log("Getting Posts");
         const getUserPosts = async () => {
             const q = query(collection(db, "posts"), where("postedBy", "==", userId), orderBy("timestamp", "desc"));
             const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -27,7 +28,7 @@ const PostsPage = ({user, userData, db}) => {
         };
 
         getUserPosts();
-    }, [userId, db]);
+    }, [userId, db, friendRequestConfirmed]);
 
     console.log(posts);
 
