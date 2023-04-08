@@ -9,7 +9,7 @@ const Intro = ({user, userData}) => {
                 <h4>Intro</h4>
             </div>
             <div className="intro-actions">
-                {checkPermission(user, userData) && (
+                {userData.id === user.uid && (
                     <>
                         <button type="button" className="intro-buttons">Add bio</button>
                         <button type="button" className="intro-buttons">Edit details</button>
