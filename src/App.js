@@ -48,6 +48,10 @@ const App = () => {
   const handleSignOut = async () => {
     await signOut(auth);
   }
+
+  const updateUserData = (updatedData) => {
+    setUserData(updatedData);
+  }
   
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -92,7 +96,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={userData ? <Home db={db} user={user} userData={userData} signOut={handleSignOut}/> : <BeatLoader/>}/>
-          <Route path="/:userId/*" element={userData ? <Profile user={user} db={db} userData={userData}/> : <BeatLoader/>}/>
+          <Route path="/:userId/*" element={userData ? <Profile updateUserData={updateUserData} user={user} db={db} userData={userData}/> : <BeatLoader/>}/>
         </Routes>
       </BrowserRouter>
     ) : (
