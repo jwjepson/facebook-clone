@@ -6,21 +6,22 @@ import AboutPage from "./AboutPage";
 import PhotosPage from "./PhotosPage";
 import FriendsPage from "./FriendsPage";
 import VideosPage from "./VideosPage";
-import {arrayRemove, arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
+import {arrayRemove, arrayUnion, doc, getDoc, updateDoc, writeBatch } from "firebase/firestore";
 import Header from "./Header";
 import ProfileHeader from "./ProfileHeader";
 import FriendRequests from "./FriendRequests";
 
-const Profile = ({user, db, userData}) => {
+const Profile = ({user, db, userData, updateUserData}) => {
 
     const [profileData, setProfileData] = useState(null);
     const [isLoading, setisLoading] = useState(true);
+    const [friendRequestConfirmed, setFriendRequestConfirmed] = useState(false);
 
     let {userId} = useParams();
 
     const sendFriendRequest = async (e) => {
-        const userId = e.target.getAttribute("data-user");
-        const docRef = doc(db, "users", userId);
+        const userIdRequest = e.target.getAttribute("data-user");
+        const docRef = doc(db, "users", userIdRequest);
         const docSnap = await getDoc(docRef);
         if (!docSnap.data().friendRequests.includes(user.uid)) {
             setProfileData(prevData => ({
@@ -41,9 +42,54 @@ const Profile = ({user, db, userData}) => {
         }
     }
 
-    const handleFriendRequestChange = (newProfileData) => {
-        setProfileData(newProfileData);
-    }
+    const confirmRequest = async (e) => {
+        let userIdRequest = e.target.getAttribute("data-id");
+        const requesterRef = doc(db, "users", userIdRequest);
+        const currentUserRef = doc(db, "users", user.uid);
+
+        // User is confirming request from requested users profile
+        if (userId === userIdRequest) {
+
+            let updatedProfileData = {
+                ...profileData,
+                friends: [...profileData.friends, user.uid]
+            }
+            setProfileData(updatedProfileData);
+
+        // User is confirming request from their own profile
+        } else {
+
+            let updatedProfileData = {
+                ...profileData,
+                friendRequests: profileData.friendRequests.filter((id) => id !== userIdRequest),
+                friends: [...profileData.friends, userIdRequest]
+            };
+                setProfileData(updatedProfileData);
+
+        }
+
+            let updatedUserData = {
+                ...userData,
+                friendRequests: userData.friendRequests.filter((id) => id !== userIdRequest),
+                friends: [...userData.friends, userIdRequest]
+            };
+                updateUserData(updatedUserData);
+       
+        const batch = writeBatch(db);
+
+        batch.update(requesterRef, {
+            friends: arrayUnion(user.uid),
+        })
+
+        batch.update(currentUserRef, {
+            friendRequests: arrayRemove(userIdRequest),
+            friends: arrayUnion(userIdRequest)
+        })
+
+        await batch.commit();
+        setFriendRequestConfirmed(true);
+
+}
 
     useEffect(() => {
         const getProfileData = async () => {
@@ -64,17 +110,19 @@ const Profile = ({user, db, userData}) => {
         return null;
     }
 
+    console.log(profileData);
+
     return (
         <>
         <Header db={db} user={user}/>
-        <ProfileHeader sendFriendRequest={sendFriendRequest} user={user} userData={profileData}/>
+        <ProfileHeader currentUserData={userData} sendFriendRequest={sendFriendRequest} confirmRequest={confirmRequest} user={user} userData={profileData}/>
         <Routes>
-            <Route path="/" element={<PostsPage user={user} db={db} userData={profileData} />}/>
-            <Route path="/about" element={userData ? <AboutPage db={db} user={user} userData={profileData}/> : <BeatLoader/>}/>
-            <Route path="/friends" element={userData ? <FriendsPage user={user} db={db} userData={profileData}/> : <BeatLoader/>}/>
-            <Route path="/photos" element={userData ? <PhotosPage user={user} userData={profileData}/> : <BeatLoader/>}/>
-            <Route path="/videos" element={userData ? <VideosPage user={user} userData={profileData}/> : <BeatLoader/>}/>
-            <Route path="/friends/requests" element={userData ? <FriendRequests onFriendRequestChange={handleFriendRequestChange} db={db} userData={profileData} user={user}/> : <BeatLoader/>}/>
+            <Route path="/" element={<PostsPage user={user} db={db} friendRequestConfirmed={friendRequestConfirmed} currentUserData={userData} userData={profileData} />}/>
+            <Route path="/about" element={profileData ? <AboutPage db={db} user={user} userData={profileData}/> : <BeatLoader/>}/>
+            <Route path="/friends" element={profileData ? <FriendsPage user={user} db={db} userData={profileData}/> : <BeatLoader/>}/>
+            <Route path="/photos" element={profileData ? <PhotosPage user={user} userData={profileData}/> : <BeatLoader/>}/>
+            <Route path="/videos" element={profileData ? <VideosPage user={user} userData={profileData}/> : <BeatLoader/>}/>
+            <Route path="/friends/requests" element={profileData ? <FriendRequests confirmRequest={confirmRequest} db={db} userData={profileData} user={user}/> : <BeatLoader/>}/>
         </Routes>
         </>
     )
