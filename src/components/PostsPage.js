@@ -7,6 +7,7 @@ import Intro from "./Intro";
 import "../styles/profilecontent.css";
 import { collection, query, where, onSnapshot, orderBy } from "firebase/firestore";
 import { useParams } from "react-router-dom";
+import ScrollToTop from "./ScrollToTop";
 import { checkPermission } from "../helpers/checkPermission";
 
 
@@ -34,6 +35,7 @@ const PostsPage = ({user, userData, db, friendRequestConfirmed}) => {
 
     return (
         <>
+        <ScrollToTop/>
             <div className="profile-content-container">
                 <div className="profile-home-content">
                     <div className="profile-left-sidebar">

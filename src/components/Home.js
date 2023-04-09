@@ -6,6 +6,7 @@ import LeftSideBar from "./LeftSideBar";
 import RightSideBar from "./RightSideBar";
 import CreatePost from "./CreatePost";
 import "../styles/home.css";
+import ScrollToTop from "./ScrollToTop";
 import Header from "./Header";
 import { collection, query, where, onSnapshot, orderBy } from "firebase/firestore";
 
@@ -32,6 +33,7 @@ const Home = ({signOut, userData, user, db}) => {
 
     return (
         <>
+        <ScrollToTop/>
         <Header db={db} user={user}/>
         {createPostDisplay && (
             <CreatePost user={user} db={db} userData={userData} close={toggleCreatePost}/>
