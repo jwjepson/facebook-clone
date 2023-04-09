@@ -30,7 +30,9 @@ const FriendsListFull = ({db, userData, user}) => {
                 <h4>Friends</h4>
                 <div className="right-info friends">
                     <input placeholder="Search" type="search"></input>
-                    <Link to={`/${userData.id}/friends/requests`}>Friend requests ({userData.friendRequests.length})</Link>
+                    {userData.id === user.uid && (
+                        <Link to={`/${userData.id}/friends/requests`}>Friend requests ({userData.friendRequests.length})</Link>
+                    )}
                 </div>
             </div>
             {checkPermission(user, userData) ? (
