@@ -19,7 +19,7 @@
     border-radius: 8px;
 }
 
-.friend-request-card > img {
+.friend-request-card > a > img {
     width: 100%;
     border-radius: 8px;
 }
