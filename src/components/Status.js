@@ -3,6 +3,7 @@ import "../styles/status.css";
 import profilePic from "../images/default-profile-pic.jpg";
 import moreIcon from "../icons/more-icon.svg";
 import closeIcon from "../icons/close-button.svg";
+import Delete from "./Delete";
 import Like from "./Like";
 import WriteComment from "./WriteComment";
 import CommentButton from "./CommentButton";
@@ -43,8 +44,6 @@ const Status = ({userData, postData, db, user, currentUserData}) => {
         getCommentsData();
     }, [])
 
-    console.log(comments);
-
     return (
         <div className="status-container">
             <div>
@@ -58,7 +57,7 @@ const Status = ({userData, postData, db, user, currentUserData}) => {
                 <div className="right-info status">
                     <div className="status-options">
                         <button type="button" name="more-button"><img className="status-option-icon" src={moreIcon}></img></button>
-                        <button type="button" name="close-button"><img className="status-option-icon" src={closeIcon}></img></button>
+                        <Delete db={db} type="posts" id={postData.id}/>
                     </div>
                 </div>
             </div>
