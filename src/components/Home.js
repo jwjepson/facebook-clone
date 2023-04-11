@@ -43,7 +43,7 @@ const Home = ({signOut, userData, user, db}) => {
             <div className="timeline">
                 <StatusCreator userData={userData} open={toggleCreatePost}/>
                 {posts.map((post) => (
-                            <Status key={post.id} user={user} db={db} userData={userData} postData={post}/>
+                            <Status key={post.id} user={user} db={db} currentUserData={userData} userData={userData} postData={post}/>
                 ))}
             </div>
             <RightSideBar/>
