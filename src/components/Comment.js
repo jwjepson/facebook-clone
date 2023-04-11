@@ -1,10 +1,17 @@
-import React from "react";
-import commentIcon from "../icons/comment-icon.svg";
+import React, { useEffect, useState } from "react";
+import "../styles/comment.css";
+import profilePic from "../images/default-profile-pic.jpg";
+import { doc, getDoc } from "firebase/firestore";
 
-const Comment = () => {
+const Comment = ({commentData}) => {
+
     return (
-        <div className="comment-button">
-            <button type="button" name="comment-button"><img className="comment-icon" src={commentIcon}></img>Comment</button>
+        <div className="comment-container">
+            <img src={profilePic} className="write-comment-avatar"></img>
+            <div className="comment-data">
+                <div className="comment-user">{commentData.postedBy.firstName} {commentData.postedBy.lastName}</div>
+                <p className="comment">{commentData.content}</p>
+            </div>
         </div>
     )
 }
