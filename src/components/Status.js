@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/status.css";
 import profilePic from "../images/default-profile-pic.jpg";
 import moreIcon from "../icons/more-icon.svg";
 import closeIcon from "../icons/close-button.svg";
 import Like from "./Like";
 import WriteComment from "./WriteComment";
-import Comment from "./Comment";
+import CommentButton from "./CommentButton";
 import Share from "./Share";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import Comment from "./Comment";
+import { collection, query, where, onSnapshot, orderBy } from "firebase/firestore";
 dayjs.extend(relativeTime);
 
 const formatDate = (timestamp) => {
@@ -23,9 +25,25 @@ const formatDate = (timestamp) => {
     return formattedDate;
 }
 
-const Status = ({userData, postData, db, user}) => {
+const Status = ({userData, postData, db, user, currentUserData}) => {
 
     const formattedDate = formatDate(postData.timestamp);
+
+    const [comments, setComments] = useState([]);
+
+    useEffect(() => {
+        const getCommentsData = async () => {
+            const q = query(collection(db, "comments"), where("postId", "==", postData.id));
+            const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                const docsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                setComments(docsData);
+            });
+            return unsubscribe;
+        }
+        getCommentsData();
+    }, [])
+
+    console.log(comments);
 
     return (
         <div className="status-container">
@@ -59,10 +77,15 @@ const Status = ({userData, postData, db, user}) => {
             )}
             <div className="status-interactive-options">
                 <Like user={user} db={db} postData={postData}/>
-                <Comment/>
+                <CommentButton/>
                 <Share/>
             </div>
-            <WriteComment/>
+            <div className="comment-section">
+                {comments.map((comment) => (
+                    <Comment db={db} key={comment.id} commentData={comment}/>
+                ))}
+            </div>
+            <WriteComment currentUserData={currentUserData} user={user} postData={postData} db={db}/>
         </div>
     )
 }
