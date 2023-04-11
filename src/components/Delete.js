@@ -2,7 +2,7 @@ import React from "react";
 import deleteIcon from "../icons/close-button.svg";
 import { doc, where, getDocs, query, collection, writeBatch } from "firebase/firestore";
 
-const Delete = ({type, id, db}) => {
+const Delete = ({type, id, db, className}) => {
 
     const handleDelete = async () => {
         const batch = writeBatch(db);
@@ -23,7 +23,7 @@ const Delete = ({type, id, db}) => {
 
     return (
         <>
-            <button onClick={handleDelete} className="delete-comment-button" type="button" name="close-button"><img className="delete-comment-icon" src={deleteIcon}></img></button>
+            <button onClick={handleDelete} className={`delete-comment-button ${className}`} type="button" name="close-button"><img className="delete-comment-icon" src={deleteIcon}></img></button>
         </>
     )
 }
