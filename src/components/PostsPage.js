@@ -11,7 +11,7 @@ import ScrollToTop from "./ScrollToTop";
 import { checkPermission } from "../helpers/checkPermission";
 
 
-const PostsPage = ({user, userData, db, friendRequestConfirmed}) => {
+const PostsPage = ({user, userData, db, friendRequestConfirmed, currentUserData}) => {
 
     let {userId} = useParams();
 
@@ -48,7 +48,7 @@ const PostsPage = ({user, userData, db, friendRequestConfirmed}) => {
                             <>
                                 <StatusCreator userData={userData}/>
                                 {posts.map((post) => (
-                                    <Status key={post.id} user={user} db={db} userData={userData} postData={post}/>
+                                    <Status key={post.id} user={user} currentUserData={currentUserData} db={db} userData={userData} postData={post}/>
                                 ))}
                             </>
                         )}
