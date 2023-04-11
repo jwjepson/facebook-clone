@@ -26,8 +26,6 @@ const WriteComment = ({db, postData, user, userData, currentUserData}) => {
         setComment("");
     }
 
-    console.log(currentUserData);
-
     return (
         <div className="write-comment-container">
             <img src={profilePic} className="write-comment-avatar"></img>
