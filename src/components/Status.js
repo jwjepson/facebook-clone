@@ -10,7 +10,7 @@ import Share from "./Share";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Comment from "./Comment";
-import { collection, query, where, onSnapshot, orderBy } from "firebase/firestore";
+import { collection, query, where, onSnapshot, orderBy, limit } from "firebase/firestore";
 dayjs.extend(relativeTime);
 
 const formatDate = (timestamp) => {
@@ -33,7 +33,7 @@ const Status = ({userData, postData, db, user, currentUserData}) => {
 
     useEffect(() => {
         const getCommentsData = async () => {
-            const q = query(collection(db, "comments"), where("postId", "==", postData.id));
+            const q = query(collection(db, "comments"), where("postId", "==", postData.id), orderBy("timestamp", "desc"), limit(3));
             const unsubscribe = onSnapshot(q, (querySnapshot) => {
                 const docsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 setComments(docsData);
@@ -81,8 +81,11 @@ const Status = ({userData, postData, db, user, currentUserData}) => {
                 <Share/>
             </div>
             <div className="comment-section">
-                {comments.map((comment) => (
-                    <Comment db={db} key={comment.id} commentData={comment}/>
+                {comments.length > 2 && (
+                    <h5 className="view-more-comments">View more comments</h5>
+                )}
+                {comments.slice(0, 2).reverse().map((comment) => (
+                    <Comment formatDate={formatDate} db={db} user={user} key={comment.id} commentData={comment}/>
                 ))}
             </div>
             <WriteComment currentUserData={currentUserData} user={user} postData={postData} db={db}/>
