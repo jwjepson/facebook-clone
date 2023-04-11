@@ -3,9 +3,10 @@ import "../styles/comment.css";
 import profilePic from "../images/default-profile-pic.jpg";
 import { doc, getDoc } from "firebase/firestore";
 import closeIcon from "../icons/close-button.svg";
+import Delete from "../components/Delete";
 import { Link } from "react-router-dom";
 
-const Comment = ({commentData, user, formatDate}) => {
+const Comment = ({commentData, user, formatDate, db}) => {
 
     const [showDeleteButton, setShowDeleteButton] = useState(false);
 
@@ -24,8 +25,8 @@ const Comment = ({commentData, user, formatDate}) => {
                     <p className="comment">{commentData.content}</p>
                 </div>
                 {user.uid === commentData.postedBy.userId && (
-                <button className={`delete-comment-button ${showDeleteButton ? "active" : ""}`} type="button"><img className="delete-comment-icon" src={closeIcon}></img></button>
-            )}
+                    <Delete className={showDeleteButton ? "active" : ""}db={db} type="comments" id={commentData.id}/>
+                )}
             </div>
                 <div className="comment-timestamp">{formattedDate}</div>
         </div>
