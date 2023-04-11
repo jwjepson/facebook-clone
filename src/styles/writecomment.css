@@ -9,6 +9,11 @@
     width: 100%;
     gap: 5px;
     padding: 5px;
+    box-sizing: border-box;
+}
+
+.write-comment-container > form {
+    width: 100%;
 }
 
 .write-comment-input {
@@ -16,11 +21,11 @@
     border-radius: 1rem;
     border: none;
     background-color: #F0F2F5;
-    height: 15px;
     width: 100%;
     text-align: left;
     color: #777;
     font-size: 13px;
     margin-right: 5px;
     outline: none;
+    box-sizing: border-box;
 }
