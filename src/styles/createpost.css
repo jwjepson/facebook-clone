@@ -6,7 +6,7 @@
     bottom: 0;
     right: 0;
     margin: auto;
-    z-index: 2;
+    z-index: 10000;
     flex-direction: column;
     width: 480px;
     height: 398px;
