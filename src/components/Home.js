@@ -38,7 +38,7 @@ const Home = ({signOut, userData, user, db}) => {
         {createPostDisplay && (
             <CreatePost user={user} db={db} userData={userData} close={toggleCreatePost}/>
         )}
-        <div className={`home-page ${createPostDisplay ? "overlay" : ""}`}>
+        <div className="home-page">
             <LeftSideBar user={user} userData={userData} signOut={signOut}/>
             <div className="timeline">
                 <StatusCreator userData={userData} open={toggleCreatePost}/>
