@@ -12,6 +12,16 @@
     box-sizing: border-box;
 }
 
+.status-container.postModal {
+    box-shadow: none;
+    overflow: auto;
+    height: 100%;
+}
+
+.status-container.postModal::-webkit-scrollbar {
+    display: none;
+}
+
 .status-container > div:nth-child(1) {
     display: flex;
     padding: 5px;
