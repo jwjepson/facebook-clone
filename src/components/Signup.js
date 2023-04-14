@@ -79,6 +79,7 @@ const Signup = ({ setUser, auth, close, db}) => {
                 friends: [],
                 friendRequests: [],
                 id: userCredential.user.uid,
+                profilePicURL: "https://firebasestorage.googleapis.com/v0/b/facebook-clone-5cb68.appspot.com/o/profilePictures%2Fdefault-profile-pic.jpg?alt=media&token=ed148652-e2a5-46b6-88c2-718ec2d9460d",
             });
         } catch (error) {
             console.error(error);
