@@ -11,7 +11,7 @@ import Header from "./Header";
 import ProfileHeader from "./ProfileHeader";
 import FriendRequests from "./FriendRequests";
 
-const Profile = ({user, db, userData, updateUserData}) => {
+const Profile = ({user, db, userData, updateUserData, storage}) => {
 
     const [profileData, setProfileData] = useState(null);
     const [isLoading, setisLoading] = useState(true);
@@ -114,8 +114,8 @@ const Profile = ({user, db, userData, updateUserData}) => {
 
     return (
         <>
-        <Header db={db} user={user}/>
-        <ProfileHeader currentUserData={userData} sendFriendRequest={sendFriendRequest} confirmRequest={confirmRequest} user={user} userData={profileData}/>
+        <Header userData={userData} db={db} user={user}/>
+        <ProfileHeader db={db} storage={storage} currentUserData={userData} sendFriendRequest={sendFriendRequest} confirmRequest={confirmRequest} user={user} userData={profileData}/>
         <Routes>
             <Route path="/" element={<PostsPage user={user} db={db} friendRequestConfirmed={friendRequestConfirmed} currentUserData={userData} userData={profileData} />}/>
             <Route path="/about" element={profileData ? <AboutPage db={db} user={user} userData={profileData}/> : <BeatLoader/>}/>
