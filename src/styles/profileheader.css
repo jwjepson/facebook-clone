@@ -27,6 +27,7 @@
     width: 168px;
     border-radius: 50%;
     border: 4px solid white;
+    object-fit: cover;
 }
 
 .profile-data {
@@ -110,4 +111,24 @@
 
 .profile-header-data {
     width: 86%;
+}
+
+.add-profile-pic {
+    height: 40px;
+    position: absolute;
+    border: 1px solid white;
+    border-radius: 50%;
+    width: 40px;
+    padding: 5px;
+    background-color: #F0F2F5;
+}
+
+.add-profile-pic:hover {
+    background-color: #DADDE1;
+    cursor: pointer;
+}
+
+.add-profile-pic-icon {
+    height: 100%;
+    width: 100%;
 }

@@ -1,6 +1,8 @@
 .write-comment-avatar {
-    height: 35px;
+    height: 32px;
+    width: 32px;
     border-radius: 50%;
+    filter: blur(.4px);
 }
 
 .write-comment-container {
