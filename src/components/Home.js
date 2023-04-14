@@ -34,7 +34,7 @@ const Home = ({signOut, userData, user, db}) => {
     return (
         <>
         <ScrollToTop/>
-        <Header db={db} user={user}/>
+        <Header userData={userData} db={db} user={user}/>
         {createPostDisplay && (
             <CreatePost user={user} db={db} userData={userData} close={toggleCreatePost}/>
         )}
