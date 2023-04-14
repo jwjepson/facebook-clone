@@ -21,6 +21,7 @@ const WriteComment = ({db, postData, user, userData, currentUserData}) => {
                 userId: user.uid,
                 firstName: currentUserData.firstName,
                 lastName: currentUserData.lastName,
+                photoURL: currentUserData.profilePicURL,
             }
         });
         setComment("");
@@ -28,7 +29,7 @@ const WriteComment = ({db, postData, user, userData, currentUserData}) => {
 
     return (
         <div className="write-comment-container">
-            <img src={profilePic} className="write-comment-avatar"></img>
+            <img src={currentUserData.profilePicURL} className="write-comment-avatar"></img>
             <form onSubmit={addComment} data-postid={postData.id}>
                 <input className="write-comment-input" autoComplete="off" onChange={handleChange} value={comment} name="write-comment" placeholder="Write a comment..." type="text"></input>
             </form>

@@ -52,7 +52,7 @@ const Search = ({toggleSearchBarDisplay, db}) => {
                 {results.length > 0 ? (
                     results.map((result) => (
                         <div onClick={handleRedirect} data-userid={result.id} className="result">
-                            <img className="sidenav-icons" alt="Avatar"src={defaultProfile}></img>
+                            <img className="sidenav-icons" alt="Avatar"src={result.profilePicURL}></img>
                             <h4 className="result-name">{result.firstName} {result.lastName}</h4>
                         </div>
                     ))

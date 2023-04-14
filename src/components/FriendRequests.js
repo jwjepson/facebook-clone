@@ -34,7 +34,7 @@ const FriendRequests = ({userData, user, db, confirmRequest}) => {
                     {friendRequestData.map((request) => (
                         <div className="friend-request-card">
                             <Link to={`/${request.id}`}>
-                                <img alt={`Profile avatar of ${request.firstName}`} src={profilePic}></img>
+                                <img alt={`Profile avatar of ${request.firstName}`} src={request.profilePicURL}></img>
                             </Link>
                             <div className="friend-request-content">
                                 <h4><Link to={`/${request.id}`}>{request.firstName} {request.lastName}</Link></h4>

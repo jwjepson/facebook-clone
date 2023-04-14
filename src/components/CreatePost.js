@@ -32,7 +32,7 @@ const CreatePost = ({close, userData, db, user}) => {
                     <img onClick={close} className="close-button" src={closeButton}></img>
                 </div>
                 <div className="create-post-data">
-                    <img className="header-button" src={profilePic}></img>
+                    <img className="header-button" src={userData.profilePicURL}></img>
                     <div className="create-post-user">{userData.firstName} {userData.lastName}</div>
                 </div>
                 <form onSubmit={handlePost}>

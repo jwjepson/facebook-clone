@@ -45,7 +45,7 @@ const FriendsListSmall = ({user, userData, db}) => {
                             <div className="friend">
                                 <Link to={`/${friend.id}`}>
                                     <div className="thumbnail friend">
-                                        <img className="photo" src={profilePic}></img>
+                                        <img className="photo" src={friend.profilePicURL}></img>
                                     </div>
                                 </Link>
                                 <h4 className="friend-name">

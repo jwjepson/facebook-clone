@@ -42,7 +42,7 @@ const FriendsListFull = ({db, userData, user}) => {
                             <div className="left-info">
                                 <Link to={`/${friend.id}`}>
                                     <div className="thumbnail friend full">
-                                        <img className="photo" src={profilePic}></img>
+                                        <img className="photo" src={friend.profilePicURL}></img>
                                     </div>
                                 </Link>
                                 <h4>

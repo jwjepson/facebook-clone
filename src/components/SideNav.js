@@ -11,7 +11,7 @@ const SideNav = ({ signOut, userData, user }) => {
         <div className="sidenav-container">
             <ul>
                 <Link to={`/${user.uid}`}>
-                    <li className="sidenav-item"><img className="sidenav-icons"src={defaultProfile}></img>{userData.firstName} {userData.lastName}</li>
+                    <li className="sidenav-item"><img className="sidenav-icons"src={userData.profilePicURL}></img>{userData.firstName} {userData.lastName}</li>
                 </Link>
                 <Link to={`/${user.uid}/friends`}>
                     <li className="sidenav-item"><img className="sidenav-icons"src={friendsIcon}></img>Friends</li>

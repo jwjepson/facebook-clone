@@ -16,7 +16,7 @@ const Comment = ({commentData, user, formatDate, db}) => {
         <div className="comment-container" onMouseEnter={() => setShowDeleteButton(true)} onMouseLeave={() => setShowDeleteButton(false)}>
             <div>
                 <Link to={`/${commentData.postedBy.userId}`}>
-                    <img src={profilePic} className="write-comment-avatar"></img>
+                    <img src={commentData.postedBy.photoURL} className="write-comment-avatar"></img>
                 </Link>
                 <div className="comment-data">
                     <Link to={`/${commentData.postedBy.userId}`}>

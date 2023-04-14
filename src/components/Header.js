@@ -8,7 +8,7 @@ import defaultProfile from "../images/default-profile-pic.jpg";
 import Search from "./Search";
 import { Link } from "react-router-dom";
 
-const Header = ({user, db}) => {
+const Header = ({user, db, userData}) => {
     const [notificationsDisplay, setnotificationsDisplay] = useState(false);
     const [searchBarDisplay, setSearchBarDisplay] = useState(false);
 
@@ -39,7 +39,7 @@ const Header = ({user, db}) => {
                 <button className="header-button" type="button" name="chat-button"><img src={chatIcon}></img></button>
                 <button onClick={toggleNotificationsDisplay} className="header-button" type="button" name="notification-button"><img src={notificationIcon}></img></button>
                 <Link to={`/${user.uid}`}>
-                    <button className="header-button" type="button" name="profile-button"><img src={defaultProfile}></img></button>
+                    <button className="header-button" type="button" name="profile-button"><img src={userData.profilePicURL}></img></button>
                 </Link>
             </div>
         </div>
