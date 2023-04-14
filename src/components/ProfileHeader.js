@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import profilePic from "../images/default-profile-pic.jpg";
+import defaultProfilePic from "../images/default-profile-pic.jpg";
 import "../styles/profileheader.css";
 import { useParams } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
+import { doc, updateDoc } from "firebase/firestore";
+import AddProfilePic from "./AddProfilePic";
 
-const ProfileHeader = ({userData , user, sendFriendRequest, currentUserData, confirmRequest}) => {
+const ProfileHeader = ({userData , user, sendFriendRequest, currentUserData, confirmRequest, storage, db}) => {
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -12,6 +14,13 @@ const ProfileHeader = ({userData , user, sendFriendRequest, currentUserData, con
     const isFriendRequestSent = userData.friendRequests.includes(user.uid);
 
     const tabs = ["posts", "about", "friends", "photos", "videos"];
+
+    const updateProfilePic = async (url) => {
+        const userRef = doc(db, "users", user.uid);
+        await updateDoc(userRef, {
+            profilePicURL: url,
+        })
+    }
 
     let {userId} = useParams();
 
@@ -64,7 +73,8 @@ const ProfileHeader = ({userData , user, sendFriendRequest, currentUserData, con
                 <div className="profile-header-data">
                     <div className="profile-header-middle-section">
                         <div className="profile-header-left-data">
-                            <img className="profile-header-picture" src={profilePic}></img>
+                            <img className="profile-header-picture" src={userData.profilePicURL}></img>
+                            <AddProfilePic updateProfilePic={updateProfilePic} storage={storage}/>
                             <div className="profile-data">
                                 <h1 className="profile-username">{userData.firstName} {userData.lastName}</h1>
                                 <a className="profile-friend-count">
