@@ -24,6 +24,7 @@ import { BeatLoader } from "react-spinners";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import Profile from "./components/Profile";
+import { getStorage, ref} from "firebase/storage";
 
 const App = () => {
 
@@ -39,6 +40,7 @@ const App = () => {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
+  const storage = getStorage(app);
 
 
   const [user, setUser] = useState(null);
@@ -96,7 +98,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={userData ? <Home db={db} user={user} userData={userData} signOut={handleSignOut}/> : <BeatLoader/>}/>
-          <Route path="/:userId/*" element={userData ? <Profile updateUserData={updateUserData} user={user} db={db} userData={userData}/> : <BeatLoader/>}/>
+          <Route path="/:userId/*" element={userData ? <Profile storage={storage} updateUserData={updateUserData} user={user} db={db} userData={userData}/> : <BeatLoader/>}/>
         </Routes>
       </BrowserRouter>
     ) : (
