@@ -78,6 +78,9 @@ const Status = ({userData, postData, db, user, currentUserData, source}) => {
                 </div>
                 <div className="status">
                     <div className="status-content">{postData.content}</div>
+                    {postData.media && (
+                        <div className="media-content"><img src={postData.media}></img></div>
+                    )}
                 </div>
                 {postData.likes.length > 0 && (
                     <div className="likes">
