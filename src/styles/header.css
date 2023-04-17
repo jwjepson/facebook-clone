@@ -60,6 +60,10 @@
     object-fit: cover;
 }
 
+.header-button.notify {
+    position: relative;
+}
+
 .header-button > object {
     height: 24px;
     color: black;
@@ -79,4 +83,20 @@
 .header-button[name="chat-button"] > img, .header-button[name="notification-button"] > img {
     height: 25px;
     border-radius: 0;
+}
+
+.badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: red;
+    border: 2px solid #FBFBFB;
+    border-radius: 50%;
+    height: 15px;
+    width: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 10px;
 }
