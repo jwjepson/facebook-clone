@@ -1,5 +1,6 @@
 import React, {useState, useRef, useEffect} from "react";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import {addDoc, collection} from "firebase/firestore";
 import { v4 } from "uuid";
 
 
@@ -12,17 +13,14 @@ const AddProfilePic = ({onClick, storage, updateProfilePic}) => {
         fileInputRef.current.click();
     }
 
-    const uploadPhoto = () => {
+    const uploadPhoto = async () => {
         if (selectedFile == null) {
             return;
         }
         const imageRef = ref(storage, `profilePictures/${selectedFile.name + v4()}`);
-        uploadBytes(imageRef, selectedFile).then((snapshot) => {
-            getDownloadURL(snapshot.ref).then((url) => {
-                updateProfilePic(url);
-            })
-        })
-        console.log("Image uploaded");
+        const snapShot = await uploadBytes(imageRef, selectedFile);
+        const url = await getDownloadURL(snapShot.ref);
+        updateProfilePic(url);
     }
 
     const handleFileSelection = (e) => {
