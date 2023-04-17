@@ -3,7 +3,7 @@ import defaultProfilePic from "../images/default-profile-pic.jpg";
 import "../styles/profileheader.css";
 import { useParams } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, addDoc, collection } from "firebase/firestore";
 import AddProfilePic from "./AddProfilePic";
 
 const ProfileHeader = ({userData , user, sendFriendRequest, currentUserData, confirmRequest, storage, db}) => {
@@ -19,6 +19,11 @@ const ProfileHeader = ({userData , user, sendFriendRequest, currentUserData, con
         const userRef = doc(db, "users", user.uid);
         await updateDoc(userRef, {
             profilePicURL: url,
+        })
+        await addDoc(collection(db, "media"), {
+            mediaURL: url,
+            timestamp: new Date(),
+            belongsTo: user.uid,
         })
     }
 
