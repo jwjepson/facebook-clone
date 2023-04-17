@@ -63,7 +63,7 @@ const Status = ({userData, postData, db, user, currentUserData, source}) => {
             <div className={`status-container ${source === "postModal" ? "postModal" : ""}`}>
                 <div>
                     <div className="left-info status">
-                        <img className="header-button" src={userData.profilePicURL}></img>
+                        <img className="header-button profile" src={userData.profilePicURL}></img>
                         <div className="status-data">
                             <div className="status-username">{userData.firstName} {userData.lastName}</div>
                             <div className="status-time">{formattedDate}</div>

@@ -39,7 +39,7 @@ const Header = ({user, db, userData}) => {
                 <button className="header-button" type="button" name="chat-button"><img src={chatIcon}></img></button>
                 <button onClick={toggleNotificationsDisplay} className="header-button" type="button" name="notification-button"><img src={notificationIcon}></img></button>
                 <Link to={`/${user.uid}`}>
-                    <button className="header-button" type="button" name="profile-button"><img src={userData.profilePicURL}></img></button>
+                    <button className="header-button profile" type="button" name="profile-button"><img src={userData.profilePicURL}></img></button>
                 </Link>
             </div>
         </div>

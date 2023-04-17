@@ -8,7 +8,7 @@ const StatusCreator = ({open, userData}) => {
     return (
         <div className="status-creator-container">
             <div className="top-info">
-                <img className="header-button" src={userData.profilePicURL}></img>
+                <img className="header-button profile" src={userData.profilePicURL}></img>
                 <button onClick={open} className="status-creator-button" type="button" name="status-button">What's on your mind, {userData.firstName}?</button>
             </div>
             <div className="bottom-options">
