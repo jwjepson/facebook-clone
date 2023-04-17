@@ -4,7 +4,7 @@ import "../styles/profileheader.css";
 import { useParams } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import { doc, updateDoc, addDoc, collection } from "firebase/firestore";
-import AddProfilePic from "./AddProfilePic";
+import AddMedia from "./AddMedia";
 
 const ProfileHeader = ({userData , user, sendFriendRequest, currentUserData, confirmRequest, storage, db}) => {
 
@@ -15,11 +15,17 @@ const ProfileHeader = ({userData , user, sendFriendRequest, currentUserData, con
 
     const tabs = ["posts", "about", "friends", "photos", "videos"];
 
-    const updateProfilePic = async (url) => {
+    const handlePhotoChange = async (url, type) => {
         const userRef = doc(db, "users", user.uid);
-        await updateDoc(userRef, {
-            profilePicURL: url,
-        })
+        if (type === "profilePictures") {
+            await updateDoc(userRef, {
+                profilePicURL: url,
+            })
+        } else if (type === "coverPhotos") {
+            await updateDoc(userRef, {
+                coverPhotoURL: url,
+            })
+        }
         await addDoc(collection(db, "media"), {
             mediaURL: url,
             timestamp: new Date(),
@@ -74,12 +80,17 @@ const ProfileHeader = ({userData , user, sendFriendRequest, currentUserData, con
     return (
         <>
         <div className="profile-header-container">
-            <div className="profile-cover"></div>
+            <div className="profile-cover">
+                {userData.coverPhotoURL && (
+                    <img className="cover-photo" src={userData.coverPhotoURL}></img>
+                )}
+                <AddMedia handlePhotoChange={handlePhotoChange} storage={storage} type="coverPhotos"/>
+            </div>
                 <div className="profile-header-data">
                     <div className="profile-header-middle-section">
                         <div className="profile-header-left-data">
                             <img className="profile-header-picture" src={userData.profilePicURL}></img>
-                            <AddProfilePic updateProfilePic={updateProfilePic} storage={storage}/>
+                            <AddMedia type="profilePictures" handlePhotoChange={handlePhotoChange} storage={storage}/>
                             <div className="profile-data">
                                 <h1 className="profile-username">{userData.firstName} {userData.lastName}</h1>
                                 <a className="profile-friend-count">
