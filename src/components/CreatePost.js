@@ -3,7 +3,7 @@ import profilePic from "../images/default-profile-pic.jpg";
 import addPhotoIcon from "../icons/add-photo-icon.svg";
 import closeButton from "../icons/close-button.svg";
 import "../styles/createpost.css";
-import {addDoc, collection} from "firebase/firestore";
+import {addDoc, collection, setDoc,} from "firebase/firestore";
 import {ref, getDownloadURL, uploadBytes} from "firebase/storage";
 import {v4} from "uuid";
 
@@ -43,10 +43,13 @@ const CreatePost = ({close, userData, db, user, storage}) => {
             return;
         }
         const mediaRef = ref(storage, `users/${userData.id}/mediaPosts/${mediaFile.name + v4()}`);
-        uploadBytes(mediaRef, mediaFile).then((snapshot) => {
-            getDownloadURL(snapshot.ref).then((url) => {
-                setMediaURL(url);
-            })
+        const snapShot = await uploadBytes(mediaRef, mediaFile);
+        const url = await getDownloadURL(snapShot.ref);
+        setMediaURL(url);
+        await addDoc(collection(db, "media"), {
+            mediaURL: url,
+            timestamp: new Date(),
+            belongsTo: userData.id,
         })
     }
 
@@ -62,7 +65,7 @@ const CreatePost = ({close, userData, db, user, storage}) => {
                     <img onClick={close} className="close-button" src={closeButton}></img>
                 </div>
                 <div className="create-post-data">
-                    <img className="header-button" src={userData.profilePicURL}></img>
+                    <img className="header-button profile" src={userData.profilePicURL}></img>
                     <div className="create-post-user">{userData.firstName} {userData.lastName}</div>
                 </div>
                 <form id="create-post-form" onSubmit={handlePost}>
