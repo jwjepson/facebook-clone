@@ -6,10 +6,11 @@ import AboutPage from "./AboutPage";
 import PhotosPage from "./PhotosPage";
 import FriendsPage from "./FriendsPage";
 import VideosPage from "./VideosPage";
-import {arrayRemove, arrayUnion, doc, getDoc, updateDoc, writeBatch } from "firebase/firestore";
+import {arrayRemove, arrayUnion, doc, getDoc, updateDoc, writeBatch, FieldValue} from "firebase/firestore";
 import Header from "./Header";
 import ProfileHeader from "./ProfileHeader";
 import FriendRequests from "./FriendRequests";
+import {sendNotification} from "../helpers/sendNotification";
 
 const Profile = ({user, db, userData, updateUserData, storage}) => {
 
@@ -26,11 +27,12 @@ const Profile = ({user, db, userData, updateUserData, storage}) => {
         if (!docSnap.data().friendRequests.includes(user.uid)) {
             setProfileData(prevData => ({
                 ...prevData,
-                friendRequests: [...prevData.friendRequests, user.uid]
+                friendRequests: [...prevData.friendRequests, user.uid],           
             }))
             await updateDoc(docRef, {
-                friendRequests: arrayUnion(user.uid)
+                friendRequests: arrayUnion(user.uid),
             })
+            sendNotification("friendRequest", userData, userIdRequest, db)
         } else {
             setProfileData(prevData => ({
                 ...prevData,
