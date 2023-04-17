@@ -5,7 +5,7 @@ import FriendsListSmall from "./FriendsListSmall";
 import Status from "./Status";
 import Intro from "./Intro";
 import "../styles/profilecontent.css";
-import { collection, query, where, onSnapshot, orderBy } from "firebase/firestore";
+import { collection, query, where, onSnapshot, orderBy, limit } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import ScrollToTop from "./ScrollToTop";
 import { checkPermission } from "../helpers/checkPermission";
@@ -18,7 +18,6 @@ const PostsPage = ({user, userData, db, friendRequestConfirmed, currentUserData}
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        console.log("Getting Posts");
         const getUserPosts = async () => {
             const q = query(collection(db, "posts"), where("postedBy", "==", userId), orderBy("timestamp", "desc"));
             const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -31,8 +30,6 @@ const PostsPage = ({user, userData, db, friendRequestConfirmed, currentUserData}
         getUserPosts();
     }, [userId, db, friendRequestConfirmed]);
 
-    console.log(posts);
-
     return (
         <>
         <ScrollToTop/>
@@ -40,7 +37,7 @@ const PostsPage = ({user, userData, db, friendRequestConfirmed, currentUserData}
                 <div className="profile-home-content">
                     <div className="profile-left-sidebar">
                         <Intro user={user} userData={userData}/>
-                        <PhotosListSmall user={user} userData={userData}/>
+                        <PhotosListSmall user={user} db={db} userData={userData}/>
                         <FriendsListSmall user={user} db={db} userData={userData}/>
                     </div>
                     <div className="profile-timeline">
