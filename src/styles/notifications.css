@@ -60,7 +60,9 @@
 
 .notification-avatar {
     height: 40px;
+    width: 40px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .see-all-notifications {
@@ -81,4 +83,8 @@
     padding: 8px;
     border-radius: 5px;
     color: #1969D2;
+}
+
+.notification.unread {
+    background-color: #E6F2FF;
 }
