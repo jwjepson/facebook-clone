@@ -1,9 +1,34 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "../styles/notifications.css";
+import {Link} from "react-router-dom";
+import {doc, updateDoc, onSnapshot, collection, query, where, orderBy, getDocs} from "firebase/firestore";
 import moreIcon from "../icons/more-icon.svg";
 import profilePic from "../images/default-profile-pic.jpg";
 
-const Notifications = (props) => {
+const Notifications = ({user, db, userData, toggleNotificationsDisplay}) => {
+
+    const [notifications, setNotifications] = useState([]);
+
+    const markRead = async (notificationId) => {
+        const notificationDoc = doc(db, "notifications", notificationId);
+        await updateDoc(notificationDoc, {
+            read: true,
+        });
+        toggleNotificationsDisplay()
+    }
+
+    useEffect(() => {
+        const getNotifications = async () => {
+            const q = query(collection(db, "notifications"), where("belongsTo", "==", user.uid), orderBy("timestamp", "desc"));
+            const querySnapshot = await getDocs(q);
+            const docsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            setNotifications(docsData);
+        };
+
+        getNotifications();
+    }, [user.uid, db]);
+    
+
     return (
         <div className="notifications-container">
             <div className="notifications-header">
@@ -16,18 +41,16 @@ const Notifications = (props) => {
                     <a className="see-all-notifications-link">See all</a>
                 </div>
                 <ul className="notifications-list">
-                    <li className="notification">
-                        <img className="notification-avatar" src={profilePic}></img>
-                        <div className="notification-content">This is a test notifcation</div>
-                    </li>
-                    <li className="notification">
-                        <img className="notification-avatar" src={profilePic}></img>
-                        <div className="notification-content">This is a test notifcation</div>
-                    </li>
-                    <li className="notification">
-                        <img className="notification-avatar" src={profilePic}></img>
-                        <div className="notification-content">This is a test notifcation</div>
-                    </li>
+                    {notifications && (
+                        notifications.map((notification) => (
+                            <Link to={`/${notification.src}`}>
+                                <li onClick={() => markRead(notification.id)} className={`notification ${notification.read === false ? "unread" : ""}`}>
+                                    <img className="notification-avatar" src={notification.picture}></img>
+                                    <div className="notification-content">{notification.content}</div>
+                                </li>
+                            </Link>
+                        ))
+                    )}
                 </ul>
             </div>
         </div>
