@@ -97,8 +97,8 @@ const App = () => {
     {user ? (
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={userData ? <Home storage={storage} db={db} user={user} userData={userData} signOut={handleSignOut}/> : <BeatLoader/>}/>
-          <Route path="/:userId/*" element={userData ? <Profile storage={storage} updateUserData={updateUserData} user={user} db={db} userData={userData}/> : <BeatLoader/>}/>
+          <Route path="/" element={userData ? <Home updateUserData={updateUserData} storage={storage} db={db} user={user} userData={userData} signOut={handleSignOut}/> : <BeatLoader/>}/>
+          <Route path="/:userId/*" element={userData ? <Profile updateUserData={updateUserData} storage={storage} updateUserData={updateUserData} user={user} db={db} userData={userData}/> : <BeatLoader/>}/>
         </Routes>
       </BrowserRouter>
     ) : (
