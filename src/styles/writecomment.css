@@ -3,6 +3,7 @@
     width: 32px;
     border-radius: 50%;
     filter: blur(.4px);
+    object-fit: cover;
 }
 
 .write-comment-container {

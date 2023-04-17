@@ -55,13 +55,20 @@
     border: none;
 }
 
+.header-button.profile {
+    padding: 0;
+    object-fit: cover;
+}
+
 .header-button > object {
     height: 24px;
     color: black;
 }
 
 .header-button > img {
-    height: 40px;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
     border-radius: 50%;
 }
 
