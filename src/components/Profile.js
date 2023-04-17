@@ -90,6 +90,7 @@ const Profile = ({user, db, userData, updateUserData, storage}) => {
 
         await batch.commit();
         setFriendRequestConfirmed(true);
+        sendNotification("confirmRequest", userData, userIdRequest, db);
 
 }
 
@@ -116,7 +117,7 @@ const Profile = ({user, db, userData, updateUserData, storage}) => {
 
     return (
         <>
-        <Header userData={userData} db={db} user={user}/>
+        <Header updateUserData={updateUserData} userData={userData} db={db} user={user}/>
         <ProfileHeader db={db} storage={storage} currentUserData={userData} sendFriendRequest={sendFriendRequest} confirmRequest={confirmRequest} user={user} userData={profileData}/>
         <Routes>
             <Route path="/" element={<PostsPage user={user} db={db} friendRequestConfirmed={friendRequestConfirmed} currentUserData={userData} userData={profileData} />}/>
