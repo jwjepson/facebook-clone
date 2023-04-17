@@ -21,12 +21,13 @@ const CreatePost = ({close, userData, db, user, storage}) => {
     const handlePost = async (e) => {
         e.preventDefault();
         close();
+        const url = await uploadMedia();
         const docRef = await addDoc(collection(db, "posts"), {
             content: postContent,
             postedBy: user.uid,
             timestamp: new Date(),
             likes: [],
-            media: mediaURL,
+            media: url,
         });
     }
 
@@ -40,7 +41,7 @@ const CreatePost = ({close, userData, db, user, storage}) => {
 
     const uploadMedia = async (e) => {
         if (mediaFile === null) {
-            return;
+            return null;
         }
         const mediaRef = ref(storage, `users/${userData.id}/mediaPosts/${mediaFile.name + v4()}`);
         const snapShot = await uploadBytes(mediaRef, mediaFile);
@@ -51,15 +52,12 @@ const CreatePost = ({close, userData, db, user, storage}) => {
             timestamp: new Date(),
             belongsTo: userData.id,
         })
+        return url;
     }
-
-    useEffect(() => {
-        uploadMedia();
-    }, [mediaFile]);
 
     return (
         <>
-            <div className={`create-post-container ${mediaURL ? "has-media" : ""}`}>
+            <div className={`create-post-container ${mediaFile ? "has-media" : ""}`}>
                 <div className="create-post-header">
                     <h4 className="create-post-title">Create post</h4>
                     <img onClick={close} className="close-button" src={closeButton}></img>
@@ -70,9 +68,9 @@ const CreatePost = ({close, userData, db, user, storage}) => {
                 </div>
                 <form id="create-post-form" onSubmit={handlePost}>
                     <textarea className="create-post-content" onChange={handleChange} value={postContent} placeholder={`What's on your mind, ${userData.firstName}?`}></textarea>
-                    {mediaURL && (
+                    {mediaFile && (
                         <div className="media">
-                            <img alt="User uploaded media" src={mediaURL}></img>
+                            <img alt="User uploaded media" src={URL.createObjectURL(mediaFile)}></img>
                         </div>
                     )}
                     <input hidden type="file" ref={mediaFileRef} onChange={handleMediaSelection}></input>
