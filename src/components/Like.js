@@ -2,8 +2,9 @@ import React, {useEffect, useState} from "react";
 import LikeIcon from "../icons/like-icon.js";
 import LikeIconFilled from "../icons/like-icon-fill.js";
 import { arrayRemove, arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
+import {Notification} from "../helpers/sendNotification.js";
 
-const Like = ({postData, db, user}) => {
+const Like = ({postData, db, user, currentUserData}) => {
 
     const [isLiked, setIsLiked] = useState(postData.likes.includes(user.uid));
 
@@ -23,6 +24,8 @@ const Like = ({postData, db, user}) => {
                     await updateDoc(docRef, {
                         likes: arrayUnion(user.uid)
                     })
+                    const notification = new Notification("like", currentUserData, postData.postedBy, db, postData);
+                    await notification.send();
                 }
             } else {
                 console.log("no");

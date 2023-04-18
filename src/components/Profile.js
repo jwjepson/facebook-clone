@@ -10,7 +10,7 @@ import {arrayRemove, arrayUnion, doc, getDoc, updateDoc, writeBatch, FieldValue}
 import Header from "./Header";
 import ProfileHeader from "./ProfileHeader";
 import FriendRequests from "./FriendRequests";
-import {sendNotification} from "../helpers/sendNotification";
+import {Notification} from "../helpers/sendNotification";
 
 const Profile = ({user, db, userData, updateUserData, storage}) => {
 
@@ -32,7 +32,8 @@ const Profile = ({user, db, userData, updateUserData, storage}) => {
             await updateDoc(docRef, {
                 friendRequests: arrayUnion(user.uid),
             })
-            sendNotification("friendRequest", userData, userIdRequest, db)
+            const notification = new Notification("friendRequest", userData, userIdRequest, db);
+            await notification.send();
         } else {
             setProfileData(prevData => ({
                 ...prevData,
@@ -90,7 +91,8 @@ const Profile = ({user, db, userData, updateUserData, storage}) => {
 
         await batch.commit();
         setFriendRequestConfirmed(true);
-        sendNotification("confirmRequest", userData, userIdRequest, db);
+        const notification = new Notification("confirmRequest", userData, userIdRequest, db);
+        await notification.send();
 
 }
 
