@@ -84,13 +84,17 @@ const ProfileHeader = ({userData , user, sendFriendRequest, currentUserData, con
                 {userData.coverPhotoURL && (
                     <img className="cover-photo" src={userData.coverPhotoURL}></img>
                 )}
-                <AddMedia handlePhotoChange={handlePhotoChange} storage={storage} type="coverPhotos"/>
+                {userData.id === user.uid && (
+                    <AddMedia handlePhotoChange={handlePhotoChange} storage={storage} type="coverPhotos"/>
+                )}
             </div>
                 <div className="profile-header-data">
                     <div className="profile-header-middle-section">
                         <div className="profile-header-left-data">
                             <img className="profile-header-picture" src={userData.profilePicURL}></img>
-                            <AddMedia type="profilePictures" handlePhotoChange={handlePhotoChange} storage={storage}/>
+                            {userData.id === user.uid && (
+                                <AddMedia type="profilePictures" handlePhotoChange={handlePhotoChange} storage={storage}/>
+                            )}
                             <div className="profile-data">
                                 <h1 className="profile-username">{userData.firstName} {userData.lastName}</h1>
                                 <a className="profile-friend-count">
