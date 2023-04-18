@@ -93,7 +93,7 @@ const Status = ({userData, postData, db, user, currentUserData, source}) => {
                 </div>
                 )}
                 <div className="status-interactive-options">
-                    <Like user={user} db={db} postData={postData}/>
+                    <Like currentUserData={currentUserData} user={user} db={db} postData={postData}/>
                     <CommentButton/>
                     <Share/>
                 </div>
