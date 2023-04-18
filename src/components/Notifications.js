@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "../styles/notifications.css";
 import {Link} from "react-router-dom";
-import {doc, updateDoc, onSnapshot, collection, query, where, orderBy, getDocs} from "firebase/firestore";
+import {doc, updateDoc, onSnapshot, collection, query, where, orderBy, getDocs, limit} from "firebase/firestore";
 import moreIcon from "../icons/more-icon.svg";
 import profilePic from "../images/default-profile-pic.jpg";
 
@@ -19,7 +19,7 @@ const Notifications = ({user, db, userData, toggleNotificationsDisplay}) => {
 
     useEffect(() => {
         const getNotifications = async () => {
-            const q = query(collection(db, "notifications"), where("belongsTo", "==", user.uid), orderBy("timestamp", "desc"));
+            const q = query(collection(db, "notifications"), where("belongsTo", "==", user.uid), orderBy("timestamp", "desc"), limit(6));
             const querySnapshot = await getDocs(q);
             const docsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             setNotifications(docsData);
