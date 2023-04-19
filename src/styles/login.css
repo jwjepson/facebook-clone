@@ -134,3 +134,7 @@ h1, h2 {
         padding: 20px;
     }
 }
+
+.error-message {
+    color: red;
+}

@@ -127,3 +127,14 @@ h2, p {
 .close-button:hover {
     cursor: pointer;
 }
+
+.error-message.signup {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+    gap: 10px;
+}
+
+.error-icon {
+    fill: red;
+}
