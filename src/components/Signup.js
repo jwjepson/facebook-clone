@@ -3,6 +3,7 @@ import "../styles/signup.css";
 import closeButton from "../icons/close-button.svg";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
+import ErrorIcon from "../icons/error-icon";
 
 const Signup = ({ setUser, auth, close, db}) => {
 
@@ -14,6 +15,8 @@ const Signup = ({ setUser, auth, close, db}) => {
     const [day, setDay] = useState("");
     const [year, setYear] = useState("");
     const [gender, setGender] = useState("");
+
+    const [errorMessage, setErrorMessage] = useState("");
 
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const days = [];
@@ -62,28 +65,48 @@ const Signup = ({ setUser, auth, close, db}) => {
 
     const signUp = async (e) => {
         e.preventDefault();
-        try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password)
-            setUser(userCredential.user);
-            console.log(userCredential.user.uid);
-            await setDoc(doc(db, "users", userCredential.user.uid), {
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-                birthday: {
-                    month: month,
-                    day: day,
-                    year: year,
-                },
-                gender: gender,
-                friends: [],
-                friendRequests: [],
-                id: userCredential.user.uid,
-                profilePicURL: "https://firebasestorage.googleapis.com/v0/b/facebook-clone-5cb68.appspot.com/o/profilePictures%2Fdefault-profile-pic.jpg?alt=media&token=ed148652-e2a5-46b6-88c2-718ec2d9460d",
-            });
-        } catch (error) {
-            console.error(error);
+        if (validateData()) {
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+                setUser(userCredential.user);
+                await setDoc(doc(db, "users", userCredential.user.uid), {
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    birthday: {
+                        month: month,
+                        day: day,
+                        year: year,
+                    },
+                    gender: gender,
+                    friends: [],
+                    friendRequests: [],
+                    id: userCredential.user.uid,
+                    profilePicURL: "https://firebasestorage.googleapis.com/v0/b/facebook-clone-5cb68.appspot.com/o/profilePictures%2Fdefault-profile-pic.jpg?alt=media&token=ed148652-e2a5-46b6-88c2-718ec2d9460d",
+                });
+            } catch (error) {
+                if (error.code === "auth/email-already-in-use") {
+                    sendErrorMessage("Email is already in use. Please try again");
+                }
+            }
+        } else {
+            return;
         }
+    }
+
+    const sendErrorMessage = (message) => {
+        setErrorMessage(message);
+        setTimeout(() => {
+            setErrorMessage("");
+        }, 3000);
+    }
+
+    const validateData = () => {
+        if (!firstName || !lastName || !email || !password || !month || !day || !year || !gender) {
+            sendErrorMessage("Please fill in all fields");
+            return false;
+        }
+        return true;
     }
 
     return (
@@ -127,6 +150,9 @@ const Signup = ({ setUser, auth, close, db}) => {
                         <input onChange={handleGenderChange} value="male" checked={gender === "male"}type="radio" name="sex" id="male"></input>
                     </div>
                 </div>
+                {errorMessage && (
+                    <span className="error-message signup">{errorMessage}<ErrorIcon/></span>
+                )}
                 <p className="terms">By clicking Sign Up, you understand that this is a Facebook clone, and is not the real Facebook. You understand
                 that this application was created soley for learning purposes and does not intend to represent Facebook.</p>
                 <div className="signup-button-container">
