@@ -7,6 +7,7 @@ const Login = ({ setUser, auth, db }) => {
     const [signUpDisplay, setsignUpDisplay] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleChange = (e) => {
         const { name, value} = e.target;
@@ -23,7 +24,10 @@ const Login = ({ setUser, auth, db }) => {
             const userCredential = await signInWithEmailAndPassword(auth, email, password)
             setUser(userCredential.user);
         } catch (error) {
-            console.log(error);
+            setErrorMessage("Invalid username or password");
+            setTimeout(() => {
+                setErrorMessage("");
+            }, 3000);
         }
     }
 
@@ -38,7 +42,7 @@ const Login = ({ setUser, auth, db }) => {
         <div className={`login-page-container ${signUpDisplay ? "overlay" : ""}`}>
             <div className="title-info">
                 <h1 className="facebook-title">facebook clone</h1>
-                <h2 className="facebook-description">Connect with friends and the world around you on Facebook.</h2>
+                <h2 className="facebook-description">Connect with friends and the world around you on Facebook Clone.</h2>
             </div>
             <div className="login-form-container">
                 <div>
@@ -47,6 +51,7 @@ const Login = ({ setUser, auth, db }) => {
                         <input className="login-input" onChange={handleChange} value={password} type="password" name="password" id="password" placeholder="Password"></input>
                         <button className="login-button" type="submit">Log In</button>
                     </form>
+                    <p className="error-message">{errorMessage}</p>
                     <a className="forgot-password">Forgot password?</a>
                 </div>
                 <button onClick={toggleSignUp} className="create-account-button" type="button">Create new account</button>
